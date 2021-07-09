@@ -1,13 +1,13 @@
 import express from 'express';
 
+import { dbTest } from '../controllers/userController';
+
 const apiRouter = express.Router();
 
 apiRouter.get('', (req, res) => {
   res.send('getTest');
 });
 
-apiRouter.post('', (req, res) => {
-  console.log(req.body);
-});
+apiRouter.post('', dbTest);
 
 export default apiRouter;

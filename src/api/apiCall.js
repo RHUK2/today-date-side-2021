@@ -10,6 +10,6 @@ export const getTest = () => {
 
 export const postTest = () => {
   return api.post('/', {
-    data: 'postTest',
+    name: 'Tomas',
   });
 };

@@ -10,7 +10,7 @@ function App() {
 
   const getData = async () => {
     try {
-      const data = await getTest();
+      const { data } = await getTest();
       console.log(data);
     } catch (e) {
       console.log(e);
