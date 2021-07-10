@@ -1,5 +1,6 @@
 import express from 'express';
 import cors from 'cors';
+import morgan from 'morgan';
 import dotenv from 'dotenv';
 
 import apiRouter from './routers/apiRouter';
@@ -16,6 +17,7 @@ app.use(cors());
 // POST 통신할 때 클라이언트 데이터를 읽기 위한 body parser 미들웨어
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(morgan('dev'));
 
 app.use('/', apiRouter);
 
