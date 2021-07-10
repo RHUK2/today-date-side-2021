@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 const MainTag = styled.main`
   background-color: teal;
-  min-height: calc(100vh - 240px);
+  min-height: calc(100vh - 260px);
   max-width: 1600px;
   margin: 0 auto;
   display: grid;

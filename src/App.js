@@ -3,15 +3,18 @@ import GlobalStyles from './GlobalStyles';
 import HomeContainer from './containers/HomeContainer';
 import Header from './layouts/Header';
 import Footer from './layouts/Footer';
+import { BrowserRouter, Switch } from 'react-router-dom';
 
 function App() {
   return (
-    <>
+    <BrowserRouter>
       <Header />
-      <HomeContainer />
+      <Switch>
+        <HomeContainer />
+      </Switch>
       <Footer />
       <GlobalStyles />
-    </>
+    </BrowserRouter>
   );
 }
 

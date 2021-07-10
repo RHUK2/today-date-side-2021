@@ -6,7 +6,7 @@ const HeaderTag = styled.header`
   left: 0px;
   width: 100%;
   background-color: beige;
-  height: 80px;
+  height: 60px;
   display: grid;
   grid-template-columns: 160px 1fr 220px;
   align-items: center;
@@ -16,7 +16,7 @@ const HeaderTag = styled.header`
 const ImgLogo = styled.img`
   grid-column: 1 / 2;
   width: 80%;
-  height: 50px;
+  height: 45px;
   background-color: darkblue;
 `;
 
