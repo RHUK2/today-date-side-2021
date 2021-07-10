@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 
-const HeaderTag = styled.header`
+const S = {};
+
+S.Header = styled.header`
   position: fixed;
   top: 0px;
   left: 0px;
@@ -13,14 +15,14 @@ const HeaderTag = styled.header`
   justify-items: center;
 `;
 
-const ImgLogo = styled.img`
+S.Logo = styled.img`
   grid-column: 1 / 2;
   width: 80%;
   height: 45px;
   background-color: darkblue;
 `;
 
-const NavLoginBox = styled.nav`
+S.Nav = styled.nav`
   width: 80%;
   grid-column: 3 / -1;
   display: flex;
@@ -30,15 +32,15 @@ const NavLoginBox = styled.nav`
 
 function Header() {
   return (
-    <HeaderTag>
-      <ImgLogo alt="" />
-      <NavLoginBox>
+    <S.Header>
+      <S.Logo alt="" />
+      <S.Nav>
         <i class="fas fa-search"></i>
         <a href="/">로그인</a>
         <a href="/">회원가입</a>
         <button>메뉴</button>
-      </NavLoginBox>
-    </HeaderTag>
+      </S.Nav>
+    </S.Header>
   );
 }
 

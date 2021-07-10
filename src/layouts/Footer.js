@@ -1,12 +1,14 @@
 import styled from 'styled-components';
 
-const FooterTag = styled.footer`
+const S = {};
+
+S.Footer = styled.footer`
   background-color: darkgray;
   height: 200px;
 `;
 
 function Footer() {
-  return <FooterTag></FooterTag>;
+  return <S.Footer></S.Footer>;
 }
 
 export default Footer;
