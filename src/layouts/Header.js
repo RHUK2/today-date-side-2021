@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const S = {};
@@ -36,8 +37,8 @@ function Header() {
       <S.Logo alt="" />
       <S.Nav>
         <i class="fas fa-search"></i>
-        <a href="/">로그인</a>
-        <a href="/">회원가입</a>
+        <Link to="/login">로그인</Link>
+        <Link to="/join">회원가입</Link>
         <button>메뉴</button>
       </S.Nav>
     </S.Header>

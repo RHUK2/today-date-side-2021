@@ -7,7 +7,7 @@ S.Main = styled.main`
   background-color: teal;
   min-height: calc(100vh - 260px);
   max-width: 1600px;
-  margin: 0 auto;
+  margin: 60px auto 0px auto;
   display: grid;
   grid-template-rows: repeat(2, 1fr);
 `;

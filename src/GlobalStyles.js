@@ -3,12 +3,28 @@ import reset from 'styled-reset';
 
 const GlobalStyles = createGlobalStyle`
     ${reset}
+    * {
+        box-sizing: border-box;
+    }
     html {
         font-size: 62.5%;
     }
     body {
-        box-sizing: border-box;
-        padding-top: 60px;
+    }
+    button {
+        border: none;
+        border-radius: 0.5rem;
+        cursor: pointer;
+    }
+    a {
+        text-decoration: none;
+        color: black;
+        :visited {
+            color: black;
+        }
+    }
+    input {
+        outline: none;
     }
 `;
 
