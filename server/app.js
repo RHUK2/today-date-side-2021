@@ -3,7 +3,7 @@ import cors from 'cors';
 import morgan from 'morgan';
 import dotenv from 'dotenv';
 
-import apiRouter from './routers/apiRouter';
+import userRouter from './routers/userRouter';
 
 dotenv.config();
 
@@ -19,7 +19,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan('dev'));
 
-app.use('/', apiRouter);
+app.use('/', userRouter);
 
 app.listen(PORT, () => {
   console.log(`✅ Server: On | Port: ${PORT} `);
