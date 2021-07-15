@@ -40,6 +40,7 @@ function Header() {
         <Link to="/login">로그인</Link>
         <Link to="/join">회원가입</Link>
         <button>메뉴</button>
+        <button>로그아웃</button>
       </S.Nav>
     </S.Header>
   );

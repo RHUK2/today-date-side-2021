@@ -29,17 +29,18 @@ function JoinContainer({ history }) {
 
   const onHandleChange = (e) => {
     const { name, value } = e.target;
-    // setState는 이벤트 핸들러 안에서 비동기..ㄴ
+    // setState는 이벤트 핸들러 안에서 비동기로 동작
     setUserInfo((prevState) => ({ ...prevState, [name]: value }));
   };
 
   const onHandleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await reqPostJoin(userInfo);
+      const response = await reqPostJoin(userInfo);
+      console.log(response.data);
       history.push('/');
     } catch (e) {
-      console.log(e);
+      console.log('Join Error 🚫 ', e);
     }
   };
 

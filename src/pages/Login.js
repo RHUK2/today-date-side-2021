@@ -53,14 +53,26 @@ S.Link = styled(Link)`
   font-size: 2rem;
 `;
 
-function Login() {
+function Login({ onHandleChange, onHandleSubmit }) {
   return (
     <S.Section>
       <S.LoginContainer>
         <S.Logo alt="" />
-        <S.Form>
-          <S.Input placeholder="이메일" type="email" />
-          <S.Input placeholder="비밀번호" type="password" />
+        <S.Form onSubmit={onHandleSubmit}>
+          <S.Input
+            name="email"
+            placeholder="이메일"
+            type="email"
+            onChange={onHandleChange}
+            required
+          />
+          <S.Input
+            name="password"
+            placeholder="비밀번호"
+            type="password"
+            onChange={onHandleChange}
+            required
+          />
           <S.LoginBtn>로그인</S.LoginBtn>
         </S.Form>
         <S.Link to="/join">회원가입</S.Link>

@@ -9,3 +9,15 @@ export const reqPostJoin = (userInfo) => {
     ...userInfo,
   });
 };
+
+export const reqPostLogin = (userInput) => {
+  return api.post(
+    '/login',
+    {
+      ...userInput,
+    },
+    {
+      withCredentials: true,
+    },
+  );
+};
