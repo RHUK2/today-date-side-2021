@@ -8,7 +8,7 @@ function LoginContainer({ history }) {
     password: '',
   });
 
-  const onHandleChange = async (e) => {
+  const onHandleChange = (e) => {
     const { name, value } = e.target;
     setUserInput((prevState) => ({ ...prevState, [name]: value }));
   };
@@ -17,7 +17,7 @@ function LoginContainer({ history }) {
     e.preventDefault();
     try {
       const response = await reqPostLogin(userInput);
-      console.log(response);
+      console.log(response.data);
       history.push('/');
     } catch (e) {
       console.log('Login Error 🚫 ', e);

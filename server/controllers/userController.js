@@ -3,7 +3,6 @@ import { getHashAndSalt } from '../utils/util';
 
 export const resPostJoin = async (req, res) => {
   const { email, password, nickname } = req.body;
-
   try {
     const [salt, hash] = await getHashAndSalt(password);
     const newUser = new User({
@@ -20,7 +19,7 @@ export const resPostJoin = async (req, res) => {
   }
 };
 
-export const resPostLogout = async (req, res) => {
+export const resPostLogout = (req, res) => {
   req.logout();
   res.redirect('/');
 };

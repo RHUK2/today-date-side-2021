@@ -19,7 +19,7 @@ userRouter.post('/login', (req, res, next) => {
       if (err) {
         return next(err);
       }
-      return res.json(req.user);
+      return res.send('User is exist.');
     });
   })(req, res, next);
 });

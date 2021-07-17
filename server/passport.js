@@ -4,8 +4,12 @@ import User from './models/User';
 import { getHashBySalt } from './utils/util';
 
 async function validPassword(password, salt, hash) {
-  const passwordHash = await getHashBySalt(password, salt);
-  return passwordHash === hash ? true : false;
+  try {
+    const passwordHash = await getHashBySalt(password, salt);
+    return passwordHash === hash ? true : false;
+  } catch (e) {
+    console.log('Password Valid Error 🚫 ', e);
+  }
 }
 
 function passportConfig() {
@@ -46,14 +50,15 @@ function passportConfig() {
   });
 
   // 세션 ID로 유저 구분
-  passport.deserializeUser(function (id, done) {
+  passport.deserializeUser(async function (id, done) {
     console.log('deserial');
-    User.findById(id, function (err, user) {
-      if (err) {
-        return done(err);
-      }
+    try {
+      const user = await User.findById(id);
       done(null, user);
-    });
+    } catch (e) {
+      console.log('deserial Error 🚫 ', e);
+      return done(e);
+    }
   });
 }
 
