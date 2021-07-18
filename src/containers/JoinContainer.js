@@ -36,11 +36,15 @@ function JoinContainer({ history }) {
   const onHandleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await reqPostJoin(userInfo);
-      console.log(response.data);
-      history.push('/');
-    } catch (e) {
-      console.log('Join Error 🚫 ', e);
+      const { data: user } = await reqPostJoin(userInfo);
+      if (user) {
+        alert('회원가입이 완료되었습니다.');
+        history.push('/login');
+      } else {
+        alert('회원가입의 실패했습니다.');
+      }
+    } catch (err) {
+      console.log('Join Error 🚫 ', err);
     }
   };
 

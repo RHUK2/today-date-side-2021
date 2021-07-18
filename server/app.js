@@ -1,6 +1,7 @@
 import dotenv from 'dotenv';
 import express from 'express';
 import cors from 'cors';
+import cookieParser from 'cookie-parser';
 import session from 'express-session';
 import MongoStore from 'connect-mongo';
 import passport from 'passport';
@@ -8,7 +9,6 @@ import morgan from 'morgan';
 
 import passportConfig from './passport';
 import userRouter from './routers/userRouter';
-import cookieParser from 'cookie-parser';
 
 dotenv.config();
 

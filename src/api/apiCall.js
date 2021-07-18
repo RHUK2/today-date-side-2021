@@ -21,3 +21,9 @@ export const reqPostLogin = (userInput) => {
     },
   );
 };
+
+export const reqGetLogout = () => {
+  return api.get('/logout', {
+    withCredentials: true,
+  });
+};

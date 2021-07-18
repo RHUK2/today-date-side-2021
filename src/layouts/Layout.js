@@ -1,10 +1,10 @@
+import HeaderContainer from '../containers/HeaderContainer';
 import Footer from './Footer';
-import Header from './Header';
 
 function Layout({ children }) {
   return (
     <>
-      <Header />
+      <HeaderContainer />
       {children}
       <Footer />
     </>

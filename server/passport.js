@@ -7,14 +7,14 @@ async function validPassword(password, salt, hash) {
   try {
     const passwordHash = await getHashBySalt(password, salt);
     return passwordHash === hash ? true : false;
-  } catch (e) {
-    console.log('Password Valid Error 🚫 ', e);
+  } catch (err) {
+    console.log('validPassword Error 🚫 ', err);
   }
 }
 
 function passportConfig() {
-  // passport.authenticate() 메서드로 아래 로컬 전략을 통한
-  // 인증 과정을 거침
+  // passport.authenticate() 메서드로 아래 로컬 전략을 통해
+  // 유저가 존재하는지, 비밀번호가 일치하는지 인증을 거침
   passport.use(
     new LocalStrategy(
       // 클라이언트에서 넘어오는 필드값으로 변경
@@ -36,28 +36,29 @@ function passportConfig() {
             return done(null, false, { message: 'Incorrect password.' });
           }
           return done(null, isUser);
-        } catch (e) {
-          return done(e);
+        } catch (err) {
+          console.log('LocalStrategy Error 🚫 ', err);
+          return done(err);
         }
       },
     ),
   );
 
-  // 인증 과정을 거친 후 세션 ID 생성
+  // 인증 과정을 거친 후 User data의 고유 ID로 세션 ID 생성
   passport.serializeUser(function (user, done) {
     console.log('serial');
     done(null, user._id);
   });
 
-  // 세션 ID로 유저 구분
+  // 세션 ID를 다시 User data의 고유 ID로 변경
   passport.deserializeUser(async function (id, done) {
     console.log('deserial');
     try {
       const user = await User.findById(id);
       done(null, user);
-    } catch (e) {
-      console.log('deserial Error 🚫 ', e);
-      return done(e);
+    } catch (err) {
+      console.log('deserial Error 🚫 ', err);
+      return done(err);
     }
   });
 }

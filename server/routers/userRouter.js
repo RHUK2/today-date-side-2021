@@ -1,27 +1,16 @@
 import express from 'express';
-import passport from 'passport';
-import { resPostJoin } from '../controllers/userController';
+import {
+  resGetLogout,
+  resPostJoin,
+  resPostLogin,
+} from '../controllers/userController';
 
 const userRouter = express.Router();
 
 userRouter.post('/join', resPostJoin);
 
-userRouter.post('/login', (req, res, next) => {
-  passport.authenticate('local', (err, user, info) => {
-    if (err) {
-      return next(err);
-    }
-    if (!user) {
-      return res.send('User is not exist.');
-    }
-    // serializer 함수 실행
-    req.logIn(user, function (err) {
-      if (err) {
-        return next(err);
-      }
-      return res.send('User is exist.');
-    });
-  })(req, res, next);
-});
+userRouter.post('/login', resPostLogin);
+
+userRouter.get('/logout', resGetLogout);
 
 export default userRouter;
