@@ -31,7 +31,7 @@ S.Nav = styled.nav`
   align-items: center;
 `;
 
-function Header({ isLoggedIn, onHandleClick }) {
+function Header({ isLoggedIn, onLogout }) {
   return (
     <S.Header>
       <S.Logo alt="" />
@@ -40,7 +40,7 @@ function Header({ isLoggedIn, onHandleClick }) {
         <Link to="/login">로그인</Link>
         <Link to="/join">회원가입</Link>
         <button>메뉴</button>
-        {isLoggedIn ? <button onClick={onHandleClick}>로그아웃</button> : null}
+        {isLoggedIn ? <button onClick={onLogout}>로그아웃</button> : null}
       </S.Nav>
     </S.Header>
   );

@@ -2,6 +2,7 @@ import passport from 'passport';
 import User from '../models/User';
 import { getHashAndSalt } from '../utils/util';
 
+// 회원가입 로직
 export const resPostJoin = async (req, res) => {
   const { email, password, nickname } = req.body;
   try {
@@ -12,34 +13,40 @@ export const resPostJoin = async (req, res) => {
       hash,
       nickname,
     });
-    const savedUser = await newUser.save();
-    return res.send(savedUser);
+    await newUser.save();
+    res.send('Join Success!');
   } catch (err) {
     console.log('resPostJoin Error 🚫 ', err);
   }
 };
 
+// 로그인 로직
 export const resPostLogin = (req, res, next) => {
+  // passport.js에 정의되어 있는 local 전략에 따른 유효성 검사 진행
   passport.authenticate('local', (err, user, info) => {
     if (err) {
-      return next(err);
+      next(err);
     }
     if (!user) {
-      return res.send(user);
+      res.send({ isLoggedIn: false });
     }
-    // serializer 함수 실행
+    // serializer & deserializer 함수 실행
     req.logIn(user, function (err) {
       if (err) {
-        return next(err);
+        next(err);
       }
-      return res.send(user);
+      res.send({ isLoggedIn: true });
     });
   })(req, res, next);
 };
 
 export const resGetLogout = (req, res) => {
   req.session.destroy();
-  res.clearCookie('session_id');
   req.logout();
-  return res.send('User is logged out.');
+  res.clearCookie('session_id');
+  res.send('Logout Success!');
+};
+
+export const resGetUser = (req, res) => {
+  res.send(req.user);
 };

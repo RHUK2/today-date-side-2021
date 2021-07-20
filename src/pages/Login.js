@@ -53,12 +53,12 @@ S.Link = styled(Link)`
   font-size: 2rem;
 `;
 
-function Login({ onHandleChange, onHandleSubmit }) {
+function Login({ onHandleChange, onLogin }) {
   return (
     <S.Section>
       <S.LoginContainer>
         <S.Logo alt="" />
-        <S.Form onSubmit={onHandleSubmit}>
+        <S.Form onSubmit={onLogin}>
           <S.Input
             name="email"
             placeholder="이메일"

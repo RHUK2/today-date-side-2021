@@ -33,16 +33,12 @@ function JoinContainer({ history }) {
     setUserInfo((prevState) => ({ ...prevState, [name]: value }));
   };
 
-  const onHandleSubmit = async (e) => {
+  const onJoin = async (e) => {
     e.preventDefault();
     try {
-      const { data: user } = await reqPostJoin(userInfo);
-      if (user) {
-        alert('회원가입이 완료되었습니다.');
-        history.push('/login');
-      } else {
-        alert('회원가입의 실패했습니다.');
-      }
+      await reqPostJoin(userInfo);
+      alert('회원가입이 완료되었습니다.');
+      history.push('/login');
     } catch (err) {
       console.log('Join Error 🚫 ', err);
     }
@@ -53,7 +49,7 @@ function JoinContainer({ history }) {
       userInfo={userInfo}
       isSame={isSame}
       isFocus={isFocus}
-      onHandleSubmit={onHandleSubmit}
+      onJoin={onJoin}
       onHandleChange={onHandleChange}
     />
   );

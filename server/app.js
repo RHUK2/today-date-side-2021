@@ -41,7 +41,9 @@ app.use(
       mongoUrl: process.env.MONGO_ACCESS_KEY,
     }), // 세션 저장소
     cookie: {
-      maxAge: 1000 * 60 * 60 * 24 * 7,
+      maxAge: 1000 * 60 * 60 * 1,
+      httpOnly: true,
+      secure: false,
     }, // 세션 생성 기간
   }),
 );

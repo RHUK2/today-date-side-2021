@@ -27,3 +27,9 @@ export const reqGetLogout = () => {
     withCredentials: true,
   });
 };
+
+export const reqGetUser = () => {
+  return api.get('/user', {
+    withCredentials: true,
+  });
+};

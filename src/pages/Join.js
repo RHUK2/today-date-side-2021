@@ -66,13 +66,13 @@ S.Link = styled(Link)`
   font-size: 1.4rem;
 `;
 
-function Join({ userInfo, isSame, isFocus, onHandleSubmit, onHandleChange }) {
+function Join({ userInfo, isSame, isFocus, onJoin, onHandleChange }) {
   return (
     <S.Section>
       <S.JoinContainer>
         <S.Logo alt="" />
         <S.Message>* 표시는 필수 입력 항목입니다.</S.Message>
-        <S.Form onSubmit={onHandleSubmit}>
+        <S.Form onSubmit={onJoin}>
           <S.InputTitle>이메일 *</S.InputTitle>
           <S.Input
             name="email"

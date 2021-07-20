@@ -46,13 +46,13 @@ function passportConfig() {
 
   // 인증 과정을 거친 후 User data의 고유 ID로 세션 ID 생성
   passport.serializeUser(function (user, done) {
-    console.log('serial');
+    console.log('세션 ID 생성');
     done(null, user._id);
   });
 
   // 세션 ID를 다시 User data의 고유 ID로 변경
   passport.deserializeUser(async function (id, done) {
-    console.log('deserial');
+    console.log('세션 ID 해석 및 변환');
     try {
       const user = await User.findById(id);
       done(null, user);
