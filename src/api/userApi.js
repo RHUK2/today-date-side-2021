@@ -10,11 +10,12 @@ export const reqPostJoin = (userInfo) => {
   });
 };
 
-export const reqPostLogin = (userInput) => {
+export const reqPostLogin = (email, password) => {
   return api.post(
     '/login',
     {
-      ...userInput,
+      email,
+      password,
     },
     {
       withCredentials: true,

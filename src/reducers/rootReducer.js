@@ -1,11 +1,11 @@
 import { combineReducers } from 'redux';
 import { all } from 'redux-saga/effects';
-import loginStatusReducer, { loginStatusSaga } from './loginStatusReducer';
+import { userReducer, userWatcher } from './userReducer';
 
 export const rootReducer = combineReducers({
-  loginStatusReducer,
+  userReducer,
 });
 
 export function* rootSaga() {
-  yield all([loginStatusSaga()]);
+  yield all([userWatcher()]);
 }

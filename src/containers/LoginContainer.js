@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { reqPostLogin } from '../api/apiCall';
+
+import { loginAction } from '../reducers/userReducer';
+
 import Login from '../pages/Login';
-import { loginAction } from '../reducers/loginStatusReducer';
 
 function LoginContainer({ history }) {
   const [userInput, setUserInput] = useState({
@@ -16,22 +17,11 @@ function LoginContainer({ history }) {
     setUserInput((prevState) => ({ ...prevState, [name]: value }));
   };
 
-  const onLogin = async (e) => {
+  const onLogin = (e) => {
     e.preventDefault();
-    try {
-      const {
-        data: { isLoggedIn },
-      } = await reqPostLogin(userInput);
-      if (isLoggedIn) {
-        dispatch(loginAction());
-        alert('로그인 되었습니다.');
-        history.push('/');
-      } else {
-        alert('사용자를 찾을 수 없습니다.');
-      }
-    } catch (err) {
-      console.log('Login Error 🚫 ', err);
-    }
+    const { email, password } = userInput;
+    dispatch(loginAction(email, password));
+    history.push('/');
   };
 
   return <Login onHandleChange={onHandleChange} onLogin={onLogin} />;

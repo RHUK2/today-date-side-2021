@@ -1,18 +1,18 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { reqGetLogout } from '../api/apiCall';
+
+import { logoutAction } from '../reducers/userReducer';
+
 import Header from '../layouts/Header';
-import { loginAction } from '../reducers/loginStatusReducer';
 
 function HeaderContainer({ history }) {
-  const { isLoggedIn } = useSelector((state) => state.loginStatusReducer);
+  const { isLoggedIn } = useSelector((state) => state.userReducer);
   const dispatch = useDispatch();
 
   const onLogout = async (e) => {
     try {
-      await reqGetLogout();
-      dispatch(loginAction());
-      history.push('/');
+      dispatch(logoutAction());
+      history.push('/login');
     } catch (err) {
       console.log('Logout Error 🚫', err);
     }

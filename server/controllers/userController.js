@@ -28,14 +28,14 @@ export const resPostLogin = (req, res, next) => {
       next(err);
     }
     if (!user) {
-      res.send({ isLoggedIn: false });
+      res.send(user);
     }
     // serializer & deserializer 함수 실행
     req.logIn(user, function (err) {
       if (err) {
         next(err);
       }
-      res.send({ isLoggedIn: true });
+      res.send(user);
     });
   })(req, res, next);
 };
