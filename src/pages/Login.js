@@ -15,9 +15,9 @@ S.LoginContainer = styled.div`
 `;
 
 S.Logo = styled.img`
+  position: relative;
+  left: 1rem;
   width: 100%;
-  height: 100px;
-  background-color: darkblue;
   margin-bottom: 2rem;
 `;
 
@@ -42,22 +42,25 @@ S.Input = styled.input`
 S.LoginBtn = styled.button`
   margin-top: 2rem;
   width: 100%;
-  height: 50px;
-  background-color: #35c5f0;
+  height: 70px;
+  background-color: #222021;
   color: white;
+  font-size: 2rem;
 `;
 
 S.Link = styled(Link)`
   display: block;
   text-align: center;
-  font-size: 2rem;
+  font-size: 1.4rem;
 `;
 
 function Login({ onHandleChange, onLogin }) {
   return (
     <S.Section>
       <S.LoginContainer>
-        <S.Logo alt="" />
+        <Link to="/">
+          <S.Logo src={'/images/logo.png'} alt="" />
+        </Link>
         <S.Form onSubmit={onLogin}>
           <S.Input
             name="email"
@@ -75,7 +78,7 @@ function Login({ onHandleChange, onLogin }) {
           />
           <S.LoginBtn>로그인</S.LoginBtn>
         </S.Form>
-        <S.Link to="/join">회원가입</S.Link>
+        <S.Link to="/join">회원가입 화면으로 가기</S.Link>
       </S.LoginContainer>
     </S.Section>
   );

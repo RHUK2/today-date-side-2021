@@ -5,22 +5,55 @@ const S = {};
 
 S.Main = styled.main`
   background-color: teal;
-  min-height: calc(100vh - 280px);
+  min-height: 100vh;
   max-width: 1600px;
-  margin: 60px auto 0px auto;
-  display: grid;
-  grid-template-rows: repeat(2, 1fr);
+  margin: 80px auto 0px auto;
+  /* display: grid; */
+  /* grid-template-rows: repeat(2, 1fr); */
+`;
+
+S.MainImgContainer = styled.div`
+  position: relative;
 `;
 
 S.MainImg = styled.img`
-  grid-row: 1 / 2;
   width: 100%;
-  height: 100%;
-  background-color: aqua;
+`;
+
+S.MessageBox = styled.div`
+  position: absolute;
+  top: 20%;
+  left: 10%;
+
+  width: 90%;
+  margin-bottom: 2rem;
+`;
+
+S.Message = styled.div`
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  line-height: 1.2;
+  :first-of-type {
+    font-size: 5rem;
+    margin-bottom: 2rem;
+  }
+  :not(:first-of-type) {
+    font-size: 3rem;
+  }
+  :last-of-type {
+    margin-bottom: 3rem;
+  }
+`;
+
+S.ShareBtn = styled.button`
+  background-color: #222021;
+  color: white;
+  padding: 0.7rem 2rem 0.5rem;
+  font-size: 3rem;
 `;
 
 S.PostContainer = styled.article`
-  grid-row: 2 / -1;
   padding: 3rem;
 `;
 
@@ -42,10 +75,20 @@ S.PostBox = styled.div`
 `;
 
 function Home() {
+  // const subMessage = `\n`;
+
   return (
     <Layout>
       <S.Main>
-        <S.MainImg alt="" />
+        <S.MainImgContainer>
+          <S.MainImg src={'/images/main-image.png'} alt="" />
+          <S.MessageBox>
+            <S.Message>데이트 장소가 고민된다면?</S.Message>
+            <S.Message>데이트 장소 공유를 통해</S.Message>
+            <S.Message>알찬 데이트를 즐겨보자!</S.Message>
+            <S.ShareBtn>공유하러 가기</S.ShareBtn>
+          </S.MessageBox>
+        </S.MainImgContainer>
         <S.PostContainer>
           <S.Title>데이트 장소를 공유해봐요.</S.Title>
           <S.BtnBox>

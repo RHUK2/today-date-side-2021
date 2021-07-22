@@ -16,13 +16,14 @@ S.JoinContainer = styled.div`
 `;
 
 S.Logo = styled.img`
+  position: relative;
+  left: 1rem;
   width: 100%;
-  height: 100px;
-  background-color: darkblue;
   margin-bottom: 2rem;
 `;
 
 S.Message = styled.div`
+  font-size: 1.3rem;
   margin-bottom: 2rem;
 `;
 
@@ -32,14 +33,14 @@ S.Form = styled.form`
 
 S.InputTitle = styled.div`
   margin-bottom: 1.5rem;
-  font-size: 1.5rem;
+  font-size: 1.7rem;
 `;
 
 S.Input = styled.input`
   width: 100%;
   height: 40px;
   padding: 1rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.7rem;
   border-radius: 0.5rem;
   border: 0.1rem solid black;
 `;
@@ -55,7 +56,7 @@ S.JoinBtn = styled.button`
   margin-top: 1rem;
   width: 100%;
   height: 70px;
-  background-color: #35c5f0;
+  background-color: #222021;
   color: white;
   font-size: 2rem;
 `;
@@ -70,7 +71,9 @@ function Join({ userInfo, isSame, isFocus, onJoin, onHandleChange }) {
   return (
     <S.Section>
       <S.JoinContainer>
-        <S.Logo alt="" />
+        <Link to="/">
+          <S.Logo src={'/images/logo.png'} alt="" />
+        </Link>
         <S.Message>* 표시는 필수 입력 항목입니다.</S.Message>
         <S.Form onSubmit={onJoin}>
           <S.InputTitle>이메일 *</S.InputTitle>

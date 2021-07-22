@@ -7,29 +7,32 @@ S.Header = styled.header`
   position: fixed;
   top: 0px;
   left: 0px;
+  z-index: 99;
 
   display: grid;
-  grid-template-columns: 250px minmax(200px, 1000px) 220px;
+  grid-template-columns: 250px minmax(200px, 1000px) 250px;
   justify-content: center;
   align-items: center;
   justify-items: center;
+  gap: 2rem;
 
   width: 100%;
   height: 80px;
+  padding: 0 5rem;
 
   background-color: #fcf4a3;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 `;
 
 S.Logo = styled.img`
-  grid-column: 1 / 2;
-  width: 85%;
+  width: 100%;
+  position: relative;
+  top: 0.3rem;
+  cursor: pointer;
 `;
 
 S.SearchBox = styled.div`
-  grid-column: 2 / 3;
-  width: 80%;
-
+  width: 100%;
   position: relative;
   i {
     position: absolute;
@@ -49,8 +52,6 @@ S.Input = styled.input`
 `;
 
 S.Nav = styled.nav`
-  grid-column: 3 / -1;
-
   display: grid;
   grid-template-columns: ${({ isLoggedIn }) =>
     isLoggedIn ? 'repeat(2, max-content)' : 'repeat(3, max-content)'};
@@ -75,7 +76,9 @@ S.LogoutBtn = styled.div`
 function Header({ isLoggedIn, onLogout }) {
   return (
     <S.Header>
-      <S.Logo src={'/images/logo.png'} alt="" />
+      <Link to="/">
+        <S.Logo src={'/images/logo.png'} alt="" />
+      </Link>
       <S.SearchBox>
         <i className="fas fa-search"></i>
         <S.Input name="term" type="title" placeholder="장소 검색" />
