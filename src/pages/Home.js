@@ -5,7 +5,7 @@ const S = {};
 
 S.Main = styled.main`
   background-color: teal;
-  min-height: calc(100vh - 260px);
+  min-height: calc(100vh - 280px);
   max-width: 1600px;
   margin: 60px auto 0px auto;
   display: grid;

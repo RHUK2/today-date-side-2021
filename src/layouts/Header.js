@@ -7,40 +7,89 @@ S.Header = styled.header`
   position: fixed;
   top: 0px;
   left: 0px;
-  width: 100%;
-  background-color: beige;
-  height: 60px;
+
   display: grid;
-  grid-template-columns: 160px 1fr 220px;
+  grid-template-columns: 250px minmax(200px, 1000px) 220px;
+  justify-content: center;
   align-items: center;
   justify-items: center;
+
+  width: 100%;
+  height: 80px;
+
+  background-color: #fcf4a3;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 `;
 
 S.Logo = styled.img`
   grid-column: 1 / 2;
+  width: 85%;
+`;
+
+S.SearchBox = styled.div`
+  grid-column: 2 / 3;
   width: 80%;
-  height: 45px;
-  background-color: darkblue;
+
+  position: relative;
+  i {
+    position: absolute;
+    top: 1.3rem;
+    left: 1.2rem;
+    font-size: 1.6rem;
+    color: white;
+  }
+`;
+
+S.Input = styled.input`
+  padding: 1rem 4rem 0.8rem;
+  width: 100%;
+  font-size: 1.8rem;
+  color: white;
+  background-color: #222021;
 `;
 
 S.Nav = styled.nav`
-  width: 80%;
   grid-column: 3 / -1;
-  display: flex;
-  justify-content: space-between;
+
+  display: grid;
+  grid-template-columns: ${({ isLoggedIn }) =>
+    isLoggedIn ? 'repeat(2, max-content)' : 'repeat(3, max-content)'};
+  justify-items: center;
   align-items: center;
+  gap: 1.4rem;
+
+  font-size: 1.8rem;
+`;
+
+S.MenuBtn = styled.button`
+  font-size: 1.8rem;
+  padding: 0.7rem 2rem 0.5rem;
+  background-color: #222021;
+  color: white;
+`;
+
+S.LogoutBtn = styled.div`
+  cursor: pointer;
 `;
 
 function Header({ isLoggedIn, onLogout }) {
   return (
     <S.Header>
-      <S.Logo alt="" />
-      <S.Nav>
-        <i class="fas fa-search"></i>
-        <Link to="/login">로그인</Link>
-        <Link to="/join">회원가입</Link>
-        <button>메뉴</button>
-        {isLoggedIn ? <button onClick={onLogout}>로그아웃</button> : null}
+      <S.Logo src={'/images/logo.png'} alt="" />
+      <S.SearchBox>
+        <i className="fas fa-search"></i>
+        <S.Input name="term" type="title" placeholder="장소 검색" />
+      </S.SearchBox>
+      <S.Nav isLoggedIn={isLoggedIn}>
+        {isLoggedIn ? (
+          <S.LogoutBtn onClick={onLogout}>로그아웃</S.LogoutBtn>
+        ) : (
+          <>
+            <Link to="/login">로그인</Link>
+            <Link to="/join">회원가입</Link>
+          </>
+        )}
+        <S.MenuBtn>메뉴</S.MenuBtn>
       </S.Nav>
     </S.Header>
   );

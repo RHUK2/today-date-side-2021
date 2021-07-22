@@ -12,7 +12,7 @@ function HeaderContainer({ history }) {
   const onLogout = async (e) => {
     try {
       dispatch(logoutAction());
-      history.push('/login');
+      history.push('/');
     } catch (err) {
       console.log('Logout Error 🚫', err);
     }
