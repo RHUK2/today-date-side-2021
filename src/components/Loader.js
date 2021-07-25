@@ -17,8 +17,8 @@ S.LoaderContainer = styled.div`
   position: fixed;
   top: 0px;
   left: 0px;
-  z-index: 100;
-  background-color: gray;
+  z-index: 1000;
+  background-color: #fcf4a3;
   display: flex;
   justify-content: center;
   align-items: center;

@@ -7,7 +7,7 @@ S.Header = styled.header`
   position: fixed;
   top: 0px;
   left: 0px;
-  z-index: 99;
+  z-index: 100;
 
   display: grid;
   grid-template-columns: 250px minmax(200px, 1000px) 250px;
@@ -73,7 +73,7 @@ S.LogoutBtn = styled.div`
   cursor: pointer;
 `;
 
-function Header({ isLoggedIn, onLogout }) {
+function Header({ isLoggedIn, onLogout, onMenuToggle }) {
   return (
     <S.Header>
       <Link to="/">
@@ -92,7 +92,9 @@ function Header({ isLoggedIn, onLogout }) {
             <Link to="/join">회원가입</Link>
           </>
         )}
-        <S.MenuBtn>메뉴</S.MenuBtn>
+        <S.MenuBtn id="menuBtn" onClick={onMenuToggle}>
+          메뉴
+        </S.MenuBtn>
       </S.Nav>
     </S.Header>
   );

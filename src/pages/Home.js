@@ -8,8 +8,6 @@ S.Main = styled.main`
   min-height: 100vh;
   max-width: 1600px;
   margin: 80px auto 0px auto;
-  /* display: grid; */
-  /* grid-template-rows: repeat(2, 1fr); */
 `;
 
 S.MainImgContainer = styled.div`
@@ -18,6 +16,7 @@ S.MainImgContainer = styled.div`
 
 S.MainImg = styled.img`
   width: 100%;
+  min-width: 800px;
 `;
 
 S.MessageBox = styled.div`
