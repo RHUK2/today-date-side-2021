@@ -73,9 +73,7 @@ S.PostBox = styled.div`
   grid-template-rows: repeat(auto-fit, 300px);
 `;
 
-function Home() {
-  // const subMessage = `\n`;
-
+function Home({ onGoPost }) {
   return (
     <Layout>
       <S.Main>
@@ -85,7 +83,7 @@ function Home() {
             <S.Message>데이트 장소가 고민된다면?</S.Message>
             <S.Message>데이트 장소 공유를 통해</S.Message>
             <S.Message>알찬 데이트를 즐겨보자!</S.Message>
-            <S.ShareBtn>공유하러 가기</S.ShareBtn>
+            <S.ShareBtn onClick={onGoPost}>공유하러 가기</S.ShareBtn>
           </S.MessageBox>
         </S.MainImgContainer>
         <S.PostContainer>

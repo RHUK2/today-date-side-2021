@@ -5,9 +5,7 @@ const api = axios.create({
 });
 
 export const reqPostJoin = (userInfo) => {
-  return api.post('/join', {
-    ...userInfo,
-  });
+  return api.post('/join', userInfo);
 };
 
 export const reqPostLogin = (email, password) => {

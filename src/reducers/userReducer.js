@@ -79,7 +79,7 @@ function* sagaGetUser() {
 
 // Init Value
 const initValue = {
-  isLoading: false,
+  isLoading: true,
   isLoggedIn: false,
   user: null,
   error: null,

@@ -21,6 +21,10 @@ function HeaderContainer({ history }) {
   };
 
   const onMenuToggle = () => {
+    if (!isLoggedIn) {
+      history.push('/login');
+      return;
+    }
     if (isOpenMenu) {
       dispatch(closeMenuAction());
     } else {

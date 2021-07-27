@@ -1,7 +1,7 @@
 // react 최신 버전부터 import React 사용안함
 import { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 
 import { loginCheckAction } from './reducers/userReducer';
 import { closeMenuAction } from './reducers/modalReducer';
@@ -14,6 +14,21 @@ import Loader from './components/Loader';
 import Menu from './components/Menu';
 
 import GlobalStyles from './GlobalStyles';
+import PostWriteContainer from './containers/PostWriteContainer';
+
+const PrivateRoute = ({ component: Component, ...parentProps }) => {
+  const { isLoggedIn } = useSelector((state) => state.userReducer);
+  return (
+    <>
+      <Route
+        {...parentProps}
+        render={(props) =>
+          isLoggedIn ? <Component {...props} /> : <Redirect to="/" />
+        }
+      />
+    </>
+  );
+};
 
 function App() {
   const { isLoading } = useSelector((state) => state.userReducer);
@@ -47,12 +62,17 @@ function App() {
 
   return (
     <BrowserRouter>
-      {isLoading && <Loader />}
-      <Switch>
-        <Route exact path="/" component={HomeContainer} />
-        <Route path="/login" component={LoginContainer} />
-        <Route path="/join" component={JoinContainer} />
-      </Switch>
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <Switch>
+          <Route exact path="/" component={HomeContainer} />
+          <Route path="/login" component={LoginContainer} />
+          <Route path="/join" component={JoinContainer} />
+          <PrivateRoute path="/post/write" component={PostWriteContainer} />
+        </Switch>
+      )}
+
       {isOpenMenu && <Menu ref={menuRef} />}
       <GlobalStyles />
     </BrowserRouter>

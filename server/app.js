@@ -9,6 +9,7 @@ import morgan from 'morgan';
 
 import passportConfig from './passport';
 import userRouter from './routers/userRouter';
+import postRouter from './routers/postRouter';
 
 dotenv.config();
 
@@ -41,7 +42,7 @@ app.use(
       mongoUrl: process.env.MONGO_ACCESS_KEY,
     }), // 세션 저장소
     cookie: {
-      maxAge: 1000 * 60 * 60 * 1,
+      maxAge: 1000 * 60 * 60 * 12,
       httpOnly: true,
       secure: false,
     }, // 세션 생성 기간
@@ -55,6 +56,7 @@ passportConfig();
 app.use(morgan('dev'));
 
 app.use('/', userRouter);
+app.use('/post', postRouter);
 
 app.listen(PORT, () => {
   console.log(`✅ Server: On | Port: ${PORT} `);
