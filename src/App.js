@@ -1,5 +1,5 @@
 // react 최신 버전부터 import React 사용안함
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 
@@ -34,7 +34,6 @@ function App() {
   const { isLoading } = useSelector((state) => state.userReducer);
   const { isOpenMenu } = useSelector((state) => state.modalReducer);
   const dispatch = useDispatch();
-  const menuRef = useRef();
 
   useEffect(() => {
     dispatch(loginCheckAction());
@@ -42,11 +41,7 @@ function App() {
   }, []);
 
   const onClose = (e) => {
-    if (
-      e.target.id !== 'menuBtn' &&
-      menuRef.current &&
-      !menuRef.current.contains(e.target)
-    ) {
+    if (e.target.id !== 'menuBtn') {
       dispatch(closeMenuAction());
     }
   };
@@ -72,8 +67,7 @@ function App() {
           <PrivateRoute path="/post/write" component={PostWriteContainer} />
         </Switch>
       )}
-
-      {isOpenMenu && <Menu ref={menuRef} />}
+      {isOpenMenu && <Menu />}
       <GlobalStyles />
     </BrowserRouter>
   );

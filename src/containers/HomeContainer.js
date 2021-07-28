@@ -7,7 +7,8 @@ function HomeContainer({ history }) {
   const onGoPost = () => {
     if (!isLoggedIn) {
       history.push('/login');
-      return;
+    } else {
+      history.push('/post/write');
     }
   };
 
