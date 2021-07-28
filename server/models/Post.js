@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 const postSchema = new mongoose.Schema({
   title: String,
   description: String,
+  area: String,
   imgURL: Array,
   creator: {
     type: mongoose.Schema.Types.ObjectId,

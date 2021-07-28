@@ -34,6 +34,15 @@ const GlobalStyles = createGlobalStyle`
         border: none;
         border-radius: 0.5rem;
     }
+    textarea {
+        font-family: 'Jua', sans-serif;
+        border-radius: 0.5rem;
+        resize: none;
+    }
+    select {
+        font-family: 'Jua', sans-serif;
+        border-radius: 0.5rem;
+    }
 `;
 
 export default GlobalStyles;

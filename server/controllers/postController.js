@@ -1,9 +1,8 @@
-import { Mongoose } from 'mongoose';
 import Post from '../models/Post';
 
 export const resPostUpload = async (req, res) => {
   const {
-    body: { title, description },
+    body: { title, description, area },
     files,
     user,
   } = req;
@@ -12,6 +11,7 @@ export const resPostUpload = async (req, res) => {
     const newPost = new Post({
       title,
       description,
+      area,
       imgURL,
       creator: user._id,
     });

@@ -30,6 +30,20 @@ const PrivateRoute = ({ component: Component, ...parentProps }) => {
   );
 };
 
+const PublicRoute = ({ component: Component, ...parentProps }) => {
+  const { isLoggedIn } = useSelector((state) => state.userReducer);
+  return (
+    <>
+      <Route
+        {...parentProps}
+        render={(props) =>
+          !isLoggedIn ? <Component {...props} /> : <Redirect to="/" />
+        }
+      />
+    </>
+  );
+};
+
 function App() {
   const { isLoading } = useSelector((state) => state.userReducer);
   const { isOpenMenu } = useSelector((state) => state.modalReducer);
@@ -62,8 +76,8 @@ function App() {
       ) : (
         <Switch>
           <Route exact path="/" component={HomeContainer} />
-          <Route path="/login" component={LoginContainer} />
-          <Route path="/join" component={JoinContainer} />
+          <PublicRoute path="/login" component={LoginContainer} />
+          <PublicRoute path="/join" component={JoinContainer} />
           <PrivateRoute path="/post/write" component={PostWriteContainer} />
         </Switch>
       )}
