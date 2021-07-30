@@ -77,7 +77,7 @@ S.Description = styled.p`
   white-space: pre-wrap;
 `;
 
-function PostDetail({ isLoading, data }) {
+function PostDetail({ isLoading, post }) {
   const settings = {
     dots: true,
     infinite: true,
@@ -95,25 +95,25 @@ function PostDetail({ isLoading, data }) {
           <S.InfoBox>
             <S.IconTextBox>
               <i className="fas fa-user"></i>
-              <span>{data.creator.nickname}</span>
+              <span>{post.creator.nickname}</span>
             </S.IconTextBox>
             <S.Date>
-              <Moment format="YYYY년 MM월 DD일 hh시 mm분">{data.Date}</Moment>
+              <Moment format="YYYY년 MM월 DD일 hh시 mm분">{post.Date}</Moment>
             </S.Date>
           </S.InfoBox>
-          <S.Title>{data.title}</S.Title>
+          <S.Title>{post.title}</S.Title>
           <S.SliderBox>
             <S.Slider {...settings}>
-              {data.imgURL.map((URL, idx) => (
+              {post.imgURL.map((URL, idx) => (
                 <img key={idx} src={URL} alt="" />
               ))}
             </S.Slider>
           </S.SliderBox>
           <S.IconTextBox>
             <i className="fas fa-compass"></i>
-            <span>{data.area}</span>
+            <span>{post.area}</span>
           </S.IconTextBox>
-          <S.Description>{data.description}</S.Description>
+          <S.Description>{post.description}</S.Description>
         </S.Section>
       )}
     </Layout>

@@ -1,10 +1,11 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Layout from '../layouts/Layout';
 
 const S = {};
 
 S.Main = styled.main`
-  background-color: teal;
+  background-color: #fffdf7;
   min-height: 100vh;
   max-width: 1600px;
   margin: 80px auto 0px auto;
@@ -57,7 +58,7 @@ S.PostContainer = styled.article`
 `;
 
 S.Title = styled.h1`
-  font-size: 3rem;
+  font-size: 4rem;
   margin-bottom: 3rem;
 `;
 
@@ -69,11 +70,36 @@ S.BtnBox = styled.div`
 
 S.PostBox = styled.div`
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(auto-fit, 300px);
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-rows: repeat(auto-fit, max-content);
+  gap: 2rem;
 `;
 
-function Home({ onGoPost }) {
+S.Post = styled.div`
+  border-radius: 0.5rem;
+  background-color: transparent;
+  img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 0.5rem;
+  }
+`;
+
+S.PostTitle = styled.h2`
+  margin-top: 1rem;
+  font-size: 2.5rem;
+`;
+
+S.PostInfo = styled.div`
+  display: flex;
+  justify-content: space-between;
+
+  font-size: 1.7rem;
+  margin-top: 0.5rem;
+`;
+
+function Home({ isLoadingAll, postAll, onGoPost }) {
   return (
     <Layout>
       <S.Main>
@@ -92,9 +118,22 @@ function Home({ onGoPost }) {
             <button>위치</button>
             <button>정렬</button>
           </S.BtnBox>
-          <S.PostBox>
-            <h2>1</h2>
-          </S.PostBox>
+          {isLoadingAll ? null : (
+            <S.PostBox>
+              {postAll.map((post) => (
+                <Link to={`/post/${post._id}`}>
+                  <S.Post>
+                    <img src={post.imgURL[0]} alt="" />
+                    <S.PostTitle>{post.title}</S.PostTitle>
+                    <S.PostInfo>
+                      <span>{post.creator.nickname}</span>
+                      <span>{post.area}</span>
+                    </S.PostInfo>
+                  </S.Post>
+                </Link>
+              ))}
+            </S.PostBox>
+          )}
         </S.PostContainer>
       </S.Main>
     </Layout>

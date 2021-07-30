@@ -1,10 +1,16 @@
 import express from 'express';
-import { resGetPost, resPostUpload } from '../controllers/postController';
+import {
+  resGetAllPost,
+  resGetPost,
+  resPostUpload,
+} from '../controllers/postController';
 import { multerImg } from '../middleware';
 
 const postRouter = express.Router();
 
 postRouter.post('/write', multerImg.array('fileImg'), resPostUpload);
+
+postRouter.get('/all-post', resGetAllPost);
 
 postRouter.get('/:id', resGetPost);
 

@@ -14,3 +14,7 @@ export const reqPostUpload = (formData) => {
 export const reqGetPost = (_id) => {
   return api.get(`/${_id}`);
 };
+
+export const reqGetAllPost = () => {
+  return api.get('/all-post');
+};

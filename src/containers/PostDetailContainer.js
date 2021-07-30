@@ -4,7 +4,7 @@ import { getPostAction } from '../reducers/postReducer';
 import PostDetail from '../pages/PostDetail';
 
 function PostDetailContainer({ match }) {
-  const { isLoading, data } = useSelector((state) => state.postReducer);
+  const { isLoading, post } = useSelector((state) => state.postReducer);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -13,7 +13,7 @@ function PostDetailContainer({ match }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return <PostDetail isLoading={isLoading} data={data} />;
+  return <PostDetail isLoading={isLoading} post={post} />;
 }
 
 export default PostDetailContainer;

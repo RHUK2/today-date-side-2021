@@ -32,6 +32,15 @@ export const resGetPost = async (req, res) => {
     const post = await Post.findById(id).populate('creator');
     res.send(post);
   } catch (err) {
-    console.log('reqGetPost Error 🚫 ', err);
+    console.log('resGetPost Error 🚫 ', err);
+  }
+};
+
+export const resGetAllPost = async (req, res) => {
+  try {
+    const postAll = await Post.find({}).populate('creator');
+    res.send(postAll);
+  } catch (err) {
+    console.log('resGetAllPost Error 🚫 ', err);
   }
 };
