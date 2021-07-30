@@ -4,9 +4,9 @@ import styled from 'styled-components';
 const S = {};
 
 S.MenuContainer = styled.ul`
-  position: fixed;
-  top: 7rem;
-  right: 6rem;
+  position: absolute;
+  top: 5rem;
+  right: -3rem;
   z-index: 101;
 
   width: 220px;

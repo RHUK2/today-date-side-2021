@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import Menu from '../components/Menu';
 
 const S = {};
 
@@ -52,6 +53,8 @@ S.Input = styled.input`
 `;
 
 S.Nav = styled.nav`
+  position: relative;
+
   display: grid;
   grid-template-columns: ${({ isLoggedIn }) =>
     isLoggedIn ? 'repeat(2, max-content)' : 'repeat(3, max-content)'};
@@ -73,7 +76,7 @@ S.LogoutBtn = styled.div`
   cursor: pointer;
 `;
 
-function Header({ isLoggedIn, onLogout, onMenuToggle }) {
+function Header({ isLoggedIn, isOpenMenu, onLogout, onMenuToggle }) {
   return (
     <S.Header>
       <Link to="/">
@@ -95,6 +98,7 @@ function Header({ isLoggedIn, onLogout, onMenuToggle }) {
         <S.MenuBtn id="menuBtn" onClick={onMenuToggle}>
           메뉴
         </S.MenuBtn>
+        {isOpenMenu && <Menu />}
       </S.Nav>
     </S.Header>
   );
