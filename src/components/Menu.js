@@ -17,7 +17,7 @@ S.MenuContainer = styled.ul`
 `;
 
 S.Menu = styled.li`
-  padding: 2.5rem 0;
+  height: 70px;
   font-size: 2.5rem;
 
   :not(:last-child) {
@@ -26,8 +26,10 @@ S.Menu = styled.li`
 `;
 
 S.Link = styled(Link)`
+  height: 100%;
   display: flex;
   justify-content: center;
+  align-items: center;
 
   i {
     color: white;
@@ -42,13 +44,13 @@ function Menu() {
   return (
     <S.MenuContainer>
       <S.Menu>
-        <S.Link to="post/write">
+        <S.Link to="/post/write">
           <i className="far fa-smile"></i>
           <div>마이페이지</div>
         </S.Link>
       </S.Menu>
       <S.Menu>
-        <S.Link to="post/write">
+        <S.Link to="/post/write">
           <i className="fas fa-pencil-alt"></i>
           <div>공유 글쓰기</div>
         </S.Link>

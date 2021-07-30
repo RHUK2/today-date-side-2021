@@ -15,11 +15,10 @@ const GlobalStyles = createGlobalStyle`
         font-family: 'Jua', sans-serif;
     }
     button {
+        font-family: 'Jua', sans-serif;
         border: none;
         border-radius: 0.5rem;
         cursor: pointer;
-        font-family: 'Jua', sans-serif;
-        
     }
     a {
         text-decoration: none;
@@ -29,10 +28,10 @@ const GlobalStyles = createGlobalStyle`
         }
     }
     input {
-        outline: none;
         font-family: 'Jua', sans-serif;
         border: none;
         border-radius: 0.5rem;
+        outline: none;
     }
     textarea {
         font-family: 'Jua', sans-serif;

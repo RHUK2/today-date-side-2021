@@ -18,8 +18,20 @@ export const resPostUpload = async (req, res) => {
     await newPost.save();
     req.user.post.push(newPost._id);
     await req.user.save();
-    res.send('Upload Success');
+    res.send(newPost._id);
   } catch (err) {
-    res.send('resPostUpload Error 🚫', err);
+    console.log('resPostUpload Error 🚫', err);
+  }
+};
+
+export const resGetPost = async (req, res) => {
+  const {
+    params: { id },
+  } = req;
+  try {
+    const post = await Post.findById(id).populate('creator');
+    res.send(post);
+  } catch (err) {
+    console.log('reqGetPost Error 🚫 ', err);
   }
 };

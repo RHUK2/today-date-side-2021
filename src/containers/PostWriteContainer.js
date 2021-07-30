@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { reqPostUpload } from '../api/postApi';
 import PostWrite from '../pages/PostWrite';
 
-function PostWriteContainer() {
+function PostWriteContainer({ history }) {
   const [postInfo, setPostInfo] = useState({
     title: '',
     description: '',
@@ -10,10 +10,6 @@ function PostWriteContainer() {
     fileImg: '',
     previewImg: '',
   });
-
-  useEffect(() => {
-    console.log(postInfo);
-  }, [postInfo]);
 
   const onHandleChange = (e) => {
     if (e.target.type === 'file') {
@@ -35,6 +31,7 @@ function PostWriteContainer() {
 
   const onHandleSubmit = async (e) => {
     e.preventDefault();
+
     const formData = new FormData();
     formData.append('title', postInfo.title);
     formData.append('description', postInfo.description);
@@ -43,14 +40,16 @@ function PostWriteContainer() {
       formData.append('fileImg', file);
     }
 
-    postInfo.previewImg.forEach((file) => URL.revokeObjectURL(file));
-    setPostInfo((prevState) => ({ ...prevState, previewImg: '' }));
+    if (postInfo.previewImg) {
+      postInfo.previewImg.forEach((file) => URL.revokeObjectURL(file));
+      setPostInfo((prevState) => ({ ...prevState, previewImg: '' }));
+    }
 
     try {
-      const res = await reqPostUpload(formData);
-      console.log(res.data);
+      const { data: _id } = await reqPostUpload(formData);
+      history.push(`/post/${_id}`);
     } catch (err) {
-      console.log(err);
+      console.log('PostUpload Error 🚫 ', err);
     }
   };
 

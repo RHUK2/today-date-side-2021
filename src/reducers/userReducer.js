@@ -24,7 +24,6 @@ export const logoutAction = () => ({ type: LOGOUT });
 // Worker
 function* sagaPostLogin(action) {
   try {
-    console.log(action);
     const { data: user } = yield call(
       reqPostLogin,
       action.email,

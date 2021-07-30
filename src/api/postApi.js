@@ -10,3 +10,7 @@ export const reqPostUpload = (formData) => {
     headers: { 'content-type': 'multipart/form-data' },
   });
 };
+
+export const reqGetPost = (_id) => {
+  return api.get(`/${_id}`);
+};

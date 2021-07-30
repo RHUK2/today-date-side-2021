@@ -74,7 +74,7 @@ S.InputFile = styled.input`
 `;
 
 S.previewBox = styled.div`
-  margin-top: 1rem;
+  padding-top: 2rem;
   display: grid;
   grid-template-columns: repeat(auto-fit, 200px);
   gap: 1rem;
@@ -82,6 +82,11 @@ S.previewBox = styled.div`
 
 S.Preview = styled.img`
   width: 100%;
+  height: 200px;
+
+  object-fit: contain;
+  border: 1px solid black;
+  background-color: whitesmoke;
   border-radius: 0.5rem;
 `;
 
