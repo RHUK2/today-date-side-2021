@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Layout from '../layouts/Layout';
+import ReactPaginate from 'react-paginate';
 
 const S = {};
 
@@ -55,6 +56,7 @@ S.ShareBtn = styled.button`
 
 S.PostContainer = styled.article`
   padding: 3rem;
+  min-height: 50vh;
 `;
 
 S.Title = styled.h1`
@@ -70,7 +72,7 @@ S.BtnBox = styled.div`
 
 S.PostBox = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(3, minmax(250px, 1fr));
   grid-template-rows: repeat(auto-fit, max-content);
   gap: 2rem;
 `;
@@ -80,7 +82,7 @@ S.Post = styled.div`
   background-color: transparent;
   img {
     width: 100%;
-    height: 300px;
+    height: 250px;
     object-fit: cover;
     border-radius: 0.5rem;
   }
@@ -99,7 +101,27 @@ S.PostInfo = styled.div`
   margin-top: 0.5rem;
 `;
 
-function Home({ isLoadingAll, postAll, onGoPost }) {
+S.PaginateContainer = styled.div`
+  .pagination-ul {
+    display: flex;
+    justify-content: space-between;
+    font-size: 2rem;
+    width: 250px;
+    margin: 5rem auto 0;
+  }
+  li {
+    cursor: pointer;
+  }
+`;
+
+function Home({
+  isLoggedIn,
+  isLoadingAll,
+  currentPageData,
+  pageCount,
+  onChangePage,
+  onGoPost,
+}) {
   return (
     <Layout>
       <S.Main>
@@ -116,11 +138,23 @@ function Home({ isLoadingAll, postAll, onGoPost }) {
           <S.Title>데이트 장소를 공유해봐요.</S.Title>
           <S.BtnBox>
             <button>위치</button>
+            <select>
+              <option>전체</option>
+              <option>서울</option>
+              <option>부산</option>
+              <option>제주도</option>
+              <option>강원도</option>
+              <option>경기도</option>
+              <option>인천</option>
+              <option>경상도</option>
+              <option>전라도</option>
+              <option>충청도</option>
+            </select>
             <button>정렬</button>
           </S.BtnBox>
           {isLoadingAll ? null : (
             <S.PostBox>
-              {postAll.map((post) => (
+              {currentPageData.map((post) => (
                 <Link to={`/post/${post._id}`}>
                   <S.Post>
                     <img src={post.imgURL[0]} alt="" />
@@ -134,6 +168,21 @@ function Home({ isLoadingAll, postAll, onGoPost }) {
               ))}
             </S.PostBox>
           )}
+          <S.PaginateContainer>
+            <ReactPaginate
+              pageCount={pageCount}
+              pageRangeDisplayed={5}
+              marginPagesDisplayed={1}
+              breakLabel={'..'}
+              previousLabel={'이전'}
+              nextLabel={'다음'}
+              onPageChange={onChangePage}
+              containerClassName={'pagination-ul'}
+              activeClassName={'currentPage'}
+              previousClassName={'pageLabel-btn'}
+              nextClassName={'pageLabel-btn'}
+            />
+          </S.PaginateContainer>
         </S.PostContainer>
       </S.Main>
     </Layout>
