@@ -109,6 +109,9 @@ function PostDetail({ isLoggedIn, isLoading, user, post }) {
   if (isLoading) {
     return <Loader />;
   }
+  if (!post) {
+    return null;
+  }
   return (
     <Layout>
       <S.Section>

@@ -11,6 +11,8 @@ const GET_POSTS_AREA = 'GET_POSTS_AREA';
 const GET_POSTS_SUCCESS = 'GET_POSTS_SUCCESS';
 const GET_POSTS_FAILED = 'GET_POSTS_FAILED';
 
+const INIT_ISLOADING = 'INIT_ISLOADING';
+
 // Action
 export const getPostAction = (_id) => ({
   type: GET_POST,
@@ -24,6 +26,10 @@ export const getPostsAction = () => ({
 export const getPostsAreaAction = (area) => ({
   type: GET_POSTS_AREA,
   area,
+});
+
+export const initIsLoading = () => ({
+  type: INIT_ISLOADING,
 });
 
 // Worker
@@ -78,9 +84,8 @@ export function* sagaGetPostsArea(action) {
 // Init Value
 export const initValue = {
   isLoading: true,
-  isLoadingAll: true,
   post: null,
-  postAll: null,
+  posts: null,
   error: null,
 };
 
@@ -107,24 +112,29 @@ export const postReducer = (state = initValue, action) => {
     case GET_POSTS:
       return {
         ...state,
-        isLoadingAll: true,
+        isLoading: true,
       };
     case GET_POSTS_AREA:
       return {
         ...state,
-        isLoadingAll: true,
+        isLoading: true,
       };
     case GET_POSTS_SUCCESS:
       return {
         ...state,
-        isLoadingAll: false,
-        postAll: action.data,
+        isLoading: false,
+        posts: action.data,
       };
     case GET_POSTS_FAILED:
       return {
         ...state,
-        isLoadingAll: false,
+        isLoading: false,
         error: action.error,
+      };
+    case INIT_ISLOADING:
+      return {
+        ...state,
+        isLoading: true,
       };
     default:
       return state;

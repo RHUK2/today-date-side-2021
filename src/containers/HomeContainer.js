@@ -5,7 +5,7 @@ import Home from '../pages/Home';
 
 function HomeContainer({ history }) {
   const { isLoggedIn } = useSelector((state) => state.userReducer);
-  const { isLoadingAll } = useSelector((state) => state.postReducer);
+  const { isLoading } = useSelector((state) => state.postReducer);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -28,7 +28,7 @@ function HomeContainer({ history }) {
 
   return (
     <Home
-      isLoadingAll={isLoadingAll}
+      isLoading={isLoading}
       onGoPost={onGoPost}
       onChangeArea={onChangeArea}
     />
