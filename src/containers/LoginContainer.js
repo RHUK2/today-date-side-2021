@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { loginAction } from '../reducers/userReducer';
-
 import Login from '../pages/Login';
 
 function LoginContainer({ history }) {
@@ -12,19 +11,19 @@ function LoginContainer({ history }) {
   });
   const dispatch = useDispatch();
 
-  const onHandleChange = (e) => {
+  const onChange = (e) => {
     const { name, value } = e.target;
     setUserInput((prevState) => ({ ...prevState, [name]: value }));
   };
 
-  const onLogin = (e) => {
+  const onSubmitLogin = (e) => {
     e.preventDefault();
     const { email, password } = userInput;
     dispatch(loginAction(email, password));
     history.push('/');
   };
 
-  return <Login onHandleChange={onHandleChange} onLogin={onLogin} />;
+  return <Login onChange={onChange} onSubmitLogin={onSubmitLogin} />;
 }
 
 export default LoginContainer;

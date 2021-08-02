@@ -19,7 +19,7 @@ S.InfoBox = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 1rem 0.8rem;
+  padding: 2rem 1rem 1.8rem;
   border-top: 2px solid black;
   border-bottom: 2px solid black;
 `;
@@ -40,10 +40,29 @@ S.Date = styled.span`
   font-size: 1.5rem;
 `;
 
+S.TitleBox = styled.div`
+  padding: 2rem 1rem 1.8rem;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  background-color: #fcf4a3;
+`;
+
 S.Title = styled.h1`
   font-size: 5rem;
-  padding: 2rem 1rem 1.8rem;
-  background-color: #fcf4a3;
+`;
+
+S.BtnBox = styled.div`
+  button {
+    background-color: #222021;
+    color: white;
+    padding: 0.5rem 1rem 0.3rem;
+    :not(:first-child) {
+      margin-left: 1rem;
+    }
+  }
 `;
 
 S.SliderBox = styled.div`
@@ -77,7 +96,7 @@ S.Description = styled.p`
   white-space: pre-wrap;
 `;
 
-function PostDetail({ isLoading, post }) {
+function PostDetail({ isLoggedIn, user, isLoading, post }) {
   const settings = {
     dots: true,
     infinite: true,
@@ -101,7 +120,15 @@ function PostDetail({ isLoading, post }) {
               <Moment format="YYYY년 MM월 DD일 hh시 mm분">{post.Date}</Moment>
             </S.Date>
           </S.InfoBox>
-          <S.Title>{post.title}</S.Title>
+          <S.TitleBox>
+            <S.Title>{post.title}</S.Title>
+            {isLoggedIn && user._id === post.creator._id && (
+              <S.BtnBox>
+                <button>수정</button>
+                <button>삭제</button>
+              </S.BtnBox>
+            )}
+          </S.TitleBox>
           <S.SliderBox>
             <S.Slider {...settings}>
               {post.imgURL.map((URL, idx) => (

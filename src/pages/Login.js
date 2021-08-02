@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import Logo from '../components/Logo';
 
 const S = {};
 
@@ -51,29 +52,27 @@ S.LoginBtn = styled.button`
 S.Link = styled(Link)`
   display: block;
   text-align: center;
-  font-size: 1.4rem;
+  font-size: 1.7rem;
 `;
 
-function Login({ onHandleChange, onLogin }) {
+function Login({ onChange, onSubmitLogin }) {
   return (
     <S.Section>
       <S.LoginContainer>
-        <Link to="/">
-          <S.Logo src={'/images/logo.png'} alt="" />
-        </Link>
-        <S.Form onSubmit={onLogin}>
+        <Logo margin={'0 0 2rem 1rem'} />
+        <S.Form onSubmit={onSubmitLogin}>
           <S.Input
             name="email"
             placeholder="이메일"
             type="email"
-            onChange={onHandleChange}
+            onChange={onChange}
             required
           />
           <S.Input
             name="password"
             placeholder="비밀번호"
             type="password"
-            onChange={onHandleChange}
+            onChange={onChange}
             required
           />
           <S.LoginBtn>로그인</S.LoginBtn>

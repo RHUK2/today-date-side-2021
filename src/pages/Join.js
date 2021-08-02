@@ -1,10 +1,12 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import Logo from '../components/Logo';
 
 const S = {};
 
 S.Section = styled.section`
   min-height: 100vh;
+
   display: flex;
   justify-content: center;
   align-items: center;
@@ -13,13 +15,6 @@ S.Section = styled.section`
 S.JoinContainer = styled.div`
   width: 360px;
   padding: 3rem 0;
-`;
-
-S.Logo = styled.img`
-  position: relative;
-  left: 1rem;
-  width: 100%;
-  margin-bottom: 2rem;
 `;
 
 S.Message = styled.div`
@@ -31,7 +26,7 @@ S.Form = styled.form`
   margin-bottom: 2rem;
 `;
 
-S.InputTitle = styled.div`
+S.Tag = styled.div`
   margin-bottom: 1.5rem;
   font-size: 1.7rem;
 `;
@@ -45,7 +40,7 @@ S.Input = styled.input`
   border: 0.1rem solid black;
 `;
 
-S.InputMessage = styled.div`
+S.CheckMessage = styled.div`
   margin-bottom: 2rem;
   color: red;
   font-size: 1.2rem;
@@ -64,64 +59,62 @@ S.JoinBtn = styled.button`
 S.Link = styled(Link)`
   display: block;
   text-align: center;
-  font-size: 1.4rem;
+  font-size: 1.7rem;
 `;
 
-function Join({ userInfo, isSame, isFocus, onJoin, onHandleChange }) {
+function Join({ userInfo, isSame, isFocus, onSubmitUserInfo, onChange }) {
   return (
     <S.Section>
       <S.JoinContainer>
-        <Link to="/">
-          <S.Logo src={'/images/logo.png'} alt="" />
-        </Link>
+        <Logo margin={'0 0 2rem 1rem'} />
         <S.Message>* 표시는 필수 입력 항목입니다.</S.Message>
-        <S.Form onSubmit={onJoin}>
-          <S.InputTitle>이메일 *</S.InputTitle>
+        <S.Form onSubmit={onSubmitUserInfo}>
+          <S.Tag>이메일 *</S.Tag>
           <S.Input
             name="email"
             placeholder="이메일"
             type="email"
             value={userInfo.email}
-            onChange={onHandleChange}
+            onChange={onChange}
             required
           />
-          <S.InputTitle>비밀번호 *</S.InputTitle>
+          <S.Tag>비밀번호 *</S.Tag>
           <S.Input
             name="password"
             placeholder="비밀번호 (4자 이상)"
             type="password"
             value={userInfo.password}
-            onChange={onHandleChange}
+            onChange={onChange}
             required
             minLength="4"
           />
-          <S.InputTitle>비밀번호 확인 *</S.InputTitle>
+          <S.Tag>비밀번호 확인 *</S.Tag>
           <S.Input
             name="passwordCheck"
             placeholder="비밀번호 확인 (4자 이상)"
             type="password"
             value={userInfo.passwordCheck}
-            onChange={onHandleChange}
+            onChange={onChange}
             required
             minLength="4"
           />
           {isFocus &&
             (isSame ? (
-              <S.InputMessage isSame={isSame}>
+              <S.CheckMessage isSame={isSame}>
                 비밀번호가 일치합니다.
-              </S.InputMessage>
+              </S.CheckMessage>
             ) : (
-              <S.InputMessage isSame={isSame}>
+              <S.CheckMessage isSame={isSame}>
                 비밀번호가 불일치합니다.
-              </S.InputMessage>
+              </S.CheckMessage>
             ))}
-          <S.InputTitle>별명 *</S.InputTitle>
+          <S.Tag>별명 *</S.Tag>
           <S.Input
             name="nickname"
             placeholder="별명 (2~15자)"
             type="text"
             value={userInfo.nickname}
-            onChange={onHandleChange}
+            onChange={onChange}
             required
           />
           <S.JoinBtn>회원가입 완료</S.JoinBtn>

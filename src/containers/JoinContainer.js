@@ -2,10 +2,10 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 
 import { reqPostJoin } from '../api/userApi';
-
 import Join from '../pages/Join';
 
 function JoinContainer({ history }) {
+  // Input State
   const [userInfo, setUserInfo] = useState({
     email: '',
     password: '',
@@ -29,13 +29,13 @@ function JoinContainer({ history }) {
     }
   }, [userInfo]);
 
-  const onHandleChange = (e) => {
+  const onChange = (e) => {
     const { name, value } = e.target;
-    // setState는 이벤트 핸들러 안에서 비동기로 동작
+    // 이벤트 핸들러 안에서 setState는 비동기로 동작하는 걸 잊지 말자.
     setUserInfo((prevState) => ({ ...prevState, [name]: value }));
   };
 
-  const onJoin = async (e) => {
+  const onSubmitUserInfo = async (e) => {
     e.preventDefault();
     try {
       await reqPostJoin(userInfo);
@@ -51,8 +51,8 @@ function JoinContainer({ history }) {
       userInfo={userInfo}
       isSame={isSame}
       isFocus={isFocus}
-      onJoin={onJoin}
-      onHandleChange={onHandleChange}
+      onSubmitUserInfo={onSubmitUserInfo}
+      onChange={onChange}
     />
   );
 }

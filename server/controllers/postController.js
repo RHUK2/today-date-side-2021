@@ -44,3 +44,19 @@ export const resGetAllPost = async (req, res) => {
     console.log('resGetAllPost Error 🚫 ', err);
   }
 };
+
+export const resGetPostArea = async (req, res) => {
+  const {
+    query: { area },
+  } = req;
+  try {
+    if (area === '전체') {
+      const postArea = await Post.find({}).populate('creator');
+      res.send(postArea);
+    }
+    const postArea = await Post.find({ area }).populate('creator');
+    res.send(postArea);
+  } catch (err) {
+    console.log('resGetPostArea Error 🚫 ', err);
+  }
+};

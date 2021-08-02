@@ -18,3 +18,11 @@ export const reqGetPost = (_id) => {
 export const reqGetAllPost = () => {
   return api.get('/all-post');
 };
+
+export const reqGetPostArea = (area) => {
+  return api.get('/place', {
+    params: {
+      area,
+    },
+  });
+};
