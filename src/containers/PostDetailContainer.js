@@ -10,15 +10,14 @@ function PostDetailContainer({ match }) {
 
   useEffect(() => {
     dispatch(getPostAction(match.params.id));
-    return () => {};
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <PostDetail
       isLoggedIn={isLoggedIn}
-      user={user}
       isLoading={isLoading}
+      user={user}
       post={post}
     />
   );

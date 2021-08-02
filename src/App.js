@@ -5,13 +5,14 @@ import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 
 import GlobalStyles from './GlobalStyles';
 
-import { loginCheckAction } from './reducers/userReducer';
+import { AuthAction } from './reducers/userReducer';
 
 import HomeContainer from './containers/HomeContainer';
 import JoinContainer from './containers/JoinContainer';
 import LoginContainer from './containers/LoginContainer';
-import PostWriteContainer from './containers/PostWriteContainer';
+import PostUploadContainer from './containers/PostUploadContainer';
 import PostDetailContainer from './containers/PostDetailContainer';
+import PostEditContainer from './containers/PostEditContainer';
 
 import Loader from './components/Loader';
 
@@ -48,24 +49,24 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(loginCheckAction());
+    dispatch(AuthAction());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  if (isLoading) {
+    return <Loader />;
+  }
   return (
     <BrowserRouter>
-      {isLoading ? (
-        <Loader />
-      ) : (
-        <Switch>
-          <Route exact path="/" component={HomeContainer} />
-          <PublicRoute path="/login" component={LoginContainer} />
-          <PublicRoute path="/join" component={JoinContainer} />
-          <PrivateRoute path="/post/write" component={PostWriteContainer} />
-          <Route path="/post/:id" component={PostDetailContainer} />
-          <Redirect from="*" to="/" />
-        </Switch>
-      )}
+      <Switch>
+        <Route exact path="/" component={HomeContainer} />
+        <PublicRoute path="/login" component={LoginContainer} />
+        <PublicRoute path="/join" component={JoinContainer} />
+        <PrivateRoute path="/post/upload" component={PostUploadContainer} />
+        <Route path="/post/:id/edit" component={PostEditContainer} />
+        <Route path="/post/:id" component={PostDetailContainer} />
+        <Redirect from="*" to="/" />
+      </Switch>
       <GlobalStyles />
     </BrowserRouter>
   );

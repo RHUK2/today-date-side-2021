@@ -36,27 +36,20 @@ export const resGetPost = async (req, res) => {
   }
 };
 
-export const resGetAllPost = async (req, res) => {
-  try {
-    const postAll = await Post.find({}).populate('creator');
-    res.send(postAll);
-  } catch (err) {
-    console.log('resGetAllPost Error 🚫 ', err);
-  }
-};
-
-export const resGetPostArea = async (req, res) => {
+export const resGetPosts = async (req, res) => {
   const {
     query: { area },
   } = req;
+  let posts = null;
+  console.log(area);
   try {
-    if (area === '전체') {
-      const postArea = await Post.find({}).populate('creator');
-      res.send(postArea);
+    if (!area) {
+      posts = await Post.find({}).populate('creator');
+    } else {
+      posts = await Post.find({ area }).populate('creator');
     }
-    const postArea = await Post.find({ area }).populate('creator');
-    res.send(postArea);
+    res.send(posts);
   } catch (err) {
-    console.log('resGetPostArea Error 🚫 ', err);
+    console.log('resGetPosts Error 🚫 ', err);
   }
 };

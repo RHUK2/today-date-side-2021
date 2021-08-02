@@ -1,15 +1,19 @@
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { reqPostUpload } from '../api/postApi';
-import PostWrite from '../pages/PostWrite';
+import PostEdit from '../pages/PostEdit';
 
-function PostWriteContainer({ history }) {
+function PostEditContainer({ history }) {
+  const { isLoading, post } = useSelector((state) => state.postReducer);
   const [postInfo, setPostInfo] = useState({
     title: '',
     description: '',
-    area: '서울',
+    area: '',
     fileImg: '',
     previewImg: '',
   });
+
+  console.log(isLoading, post);
 
   const onHandleChange = (e) => {
     if (e.target.type === 'file') {
@@ -54,7 +58,7 @@ function PostWriteContainer({ history }) {
   };
 
   return (
-    <PostWrite
+    <PostEdit
       postInfo={postInfo}
       onHandleChange={onHandleChange}
       onHandleSubmit={onHandleSubmit}
@@ -62,4 +66,4 @@ function PostWriteContainer({ history }) {
   );
 }
 
-export default PostWriteContainer;
+export default PostEditContainer;

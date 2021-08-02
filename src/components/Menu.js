@@ -44,13 +44,13 @@ function Menu() {
   return (
     <S.MenuContainer>
       <S.Menu>
-        <S.Link to="/post/write">
+        <S.Link to="/post/upload">
           <i className="far fa-smile"></i>
           <div>마이페이지</div>
         </S.Link>
       </S.Menu>
       <S.Menu>
-        <S.Link to="/post/write">
+        <S.Link to="/post/upload">
           <i className="fas fa-pencil-alt"></i>
           <div>공유 글쓰기</div>
         </S.Link>

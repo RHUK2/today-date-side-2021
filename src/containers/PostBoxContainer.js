@@ -6,7 +6,7 @@ function PostBoxContainer() {
   const [currentPage, setCurrentPage] = useState(0);
   const { postAll } = useSelector((state) => state.postReducer);
 
-  const PER_PAGE = 5;
+  const PER_PAGE = 12;
   const offset = currentPage * PER_PAGE;
   const currentPageData = postAll.slice(offset, offset + PER_PAGE);
   const pageCount = Math.ceil(postAll.length / PER_PAGE);

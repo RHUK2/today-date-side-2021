@@ -40,6 +40,7 @@ export const resPostLogin = (req, res, next) => {
   })(req, res, next);
 };
 
+// 로그아웃 로직
 export const resGetLogout = (req, res) => {
   req.session.destroy();
   req.logout();
@@ -47,6 +48,7 @@ export const resGetLogout = (req, res) => {
   res.send('Logout Success!');
 };
 
-export const resGetUser = (req, res) => {
+// 인증 로직
+export const resGetAuth = (req, res) => {
   res.send(req.user);
 };

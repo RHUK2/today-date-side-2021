@@ -7,7 +7,7 @@ const S = {};
 S.PostBox = styled.div`
   display: grid;
   grid-template-columns: repeat(3, minmax(250px, 1fr));
-  grid-template-rows: repeat(auto-fit, max-content);
+  grid-template-rows: repeat(4, max-content);
   gap: 2rem;
 `;
 
@@ -16,7 +16,7 @@ S.Post = styled.div`
   background-color: transparent;
   img {
     width: 100%;
-    height: 250px;
+    height: 350px;
     object-fit: cover;
     border-radius: 0.5rem;
   }
@@ -58,45 +58,42 @@ S.NoDataContainer = styled.div`
 `;
 
 function PostBox({ currentPageData, pageCount, onChangePage }) {
+  if (!currentPageData.length) {
+    return <S.NoDataContainer>작성된 게시글이 없습니다.</S.NoDataContainer>;
+  }
   return (
     <>
-      {currentPageData.length ? (
-        <>
-          <S.PostBox>
-            {currentPageData
-              .map((post) => (
-                <Link key={post._id} to={`/post/${post._id}`}>
-                  <S.Post>
-                    <img src={post.imgURL[0]} alt="" />
-                    <S.PostTitle>{post.title}</S.PostTitle>
-                    <S.PostInfo>
-                      <span>{post.creator.nickname}</span>
-                      <span>{post.area}</span>
-                    </S.PostInfo>
-                  </S.Post>
-                </Link>
-              ))
-              .reverse()}
-          </S.PostBox>
-          <S.PaginateContainer>
-            <ReactPaginate
-              pageCount={pageCount}
-              pageRangeDisplayed={5}
-              marginPagesDisplayed={1}
-              breakLabel={'..'}
-              previousLabel={'이전'}
-              nextLabel={'다음'}
-              onPageChange={onChangePage}
-              containerClassName={'pagination-ul'}
-              activeClassName={'currentPage'}
-              previousClassName={'pageLabel-btn'}
-              nextClassName={'pageLabel-btn'}
-            />
-          </S.PaginateContainer>
-        </>
-      ) : (
-        <S.NoDataContainer>작성된 게시글이 없습니다.</S.NoDataContainer>
-      )}
+      <S.PostBox>
+        {currentPageData
+          .map((post) => (
+            <Link key={post._id} to={`/post/${post._id}`}>
+              <S.Post>
+                <img src={post.imgURL[0]} alt="" />
+                <S.PostTitle>{post.title}</S.PostTitle>
+                <S.PostInfo>
+                  <span>{post.creator.nickname}</span>
+                  <span>{post.area}</span>
+                </S.PostInfo>
+              </S.Post>
+            </Link>
+          ))
+          .reverse()}
+      </S.PostBox>
+      <S.PaginateContainer>
+        <ReactPaginate
+          pageCount={pageCount}
+          pageRangeDisplayed={5}
+          marginPagesDisplayed={1}
+          breakLabel={'...'}
+          previousLabel={'이전'}
+          nextLabel={'다음'}
+          onPageChange={onChangePage}
+          containerClassName={'pagination-ul'}
+          activeClassName={'currentPage'}
+          previousClassName={'pageLabel-btn'}
+          nextClassName={'pageLabel-btn'}
+        />
+      </S.PaginateContainer>
     </>
   );
 }

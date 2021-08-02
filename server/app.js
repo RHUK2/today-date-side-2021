@@ -8,8 +8,7 @@ import passport from 'passport';
 import morgan from 'morgan';
 
 import passportConfig from './passport';
-import userRouter from './routers/userRouter';
-import postRouter from './routers/postRouter';
+import apiRouter from './routers/apiRouter';
 
 dotenv.config();
 
@@ -55,8 +54,7 @@ passportConfig();
 // 통신 상태 메세지 보기 좋게 출력해주는 미들웨어
 app.use(morgan('dev'));
 
-app.use('/', userRouter);
-app.use('/post', postRouter);
+app.use('/', apiRouter);
 
 app.listen(PORT, () => {
   console.log(`✅ Server: On | Port: ${PORT} `);

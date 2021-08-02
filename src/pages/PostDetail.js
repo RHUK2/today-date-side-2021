@@ -3,6 +3,7 @@ import Layout from '../layouts/Layout';
 import Loader from '../components/Loader';
 import Slider from 'react-slick';
 import Moment from 'react-moment';
+import { Link } from 'react-router-dom';
 
 const S = {};
 
@@ -96,7 +97,7 @@ S.Description = styled.p`
   white-space: pre-wrap;
 `;
 
-function PostDetail({ isLoggedIn, user, isLoading, post }) {
+function PostDetail({ isLoggedIn, isLoading, user, post }) {
   const settings = {
     dots: true,
     infinite: true,
@@ -105,44 +106,45 @@ function PostDetail({ isLoggedIn, user, isLoading, post }) {
     slidesToScroll: 1,
   };
 
+  if (isLoading) {
+    return <Loader />;
+  }
   return (
     <Layout>
-      {isLoading ? (
-        <Loader />
-      ) : (
-        <S.Section>
-          <S.InfoBox>
-            <S.IconTextBox>
-              <i className="fas fa-user"></i>
-              <span>{post.creator.nickname}</span>
-            </S.IconTextBox>
-            <S.Date>
-              <Moment format="YYYY년 MM월 DD일 hh시 mm분">{post.Date}</Moment>
-            </S.Date>
-          </S.InfoBox>
-          <S.TitleBox>
-            <S.Title>{post.title}</S.Title>
-            {isLoggedIn && user._id === post.creator._id && (
-              <S.BtnBox>
-                <button>수정</button>
-                <button>삭제</button>
-              </S.BtnBox>
-            )}
-          </S.TitleBox>
-          <S.SliderBox>
-            <S.Slider {...settings}>
-              {post.imgURL.map((URL, idx) => (
-                <img key={idx} src={URL} alt="" />
-              ))}
-            </S.Slider>
-          </S.SliderBox>
+      <S.Section>
+        <S.InfoBox>
           <S.IconTextBox>
-            <i className="fas fa-compass"></i>
-            <span>{post.area}</span>
+            <i className="fas fa-user"></i>
+            <span>{post.creator.nickname}</span>
           </S.IconTextBox>
-          <S.Description>{post.description}</S.Description>
-        </S.Section>
-      )}
+          <S.Date>
+            <Moment format="YYYY년 MM월 DD일 hh시 mm분">{post.Date}</Moment>
+          </S.Date>
+        </S.InfoBox>
+        <S.TitleBox>
+          <S.Title>{post.title}</S.Title>
+          {isLoggedIn && user._id === post.creator._id && (
+            <S.BtnBox>
+              <Link to={`/post/${post._id}/edit`}>
+                <button>수정</button>
+              </Link>
+              <button>삭제</button>
+            </S.BtnBox>
+          )}
+        </S.TitleBox>
+        <S.SliderBox>
+          <S.Slider {...settings}>
+            {post.imgURL.map((URL, idx) => (
+              <img key={idx} src={URL} alt="" />
+            ))}
+          </S.Slider>
+        </S.SliderBox>
+        <S.IconTextBox>
+          <i className="fas fa-compass"></i>
+          <span>{post.area}</span>
+        </S.IconTextBox>
+        <S.Description>{post.description}</S.Description>
+      </S.Section>
     </Layout>
   );
 }

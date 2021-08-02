@@ -1,16 +1,15 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
-import { reqGetPost, reqGetAllPost, reqGetPostArea } from '../api/postApi';
+import { reqGetPost, reqGetPosts } from '../api/postApi';
 
 // action.type config
 const GET_POST = 'GET_POST';
 const GET_POST_SUCCESS = 'GET_POST_SUCCESS';
 const GET_POST_FAILED = 'GET_POST_FAILED';
-const GET_POST_ALL = 'GET_POST_ALL';
-const GET_POST_ALL_SUCCESS = 'GET_POST_ALL_SUCCESS';
-const GET_POST_ALL_FAILED = 'GET_POST_ALL_FAILED';
-const GET_POST_AREA = 'GET_POST_AREA';
-const GET_POST_AREA_SUCCESS = 'GET_POST_AREA_SUCCESS';
-const GET_POST_AREA_FAILED = 'GET_POST_AREA_FAILED';
+
+const GET_POSTS = 'GET_POSTS';
+const GET_POSTS_AREA = 'GET_POSTS_AREA';
+const GET_POSTS_SUCCESS = 'GET_POSTS_SUCCESS';
+const GET_POSTS_FAILED = 'GET_POSTS_FAILED';
 
 // Action
 export const getPostAction = (_id) => ({
@@ -18,12 +17,12 @@ export const getPostAction = (_id) => ({
   _id,
 });
 
-export const getPostAllAction = () => ({
-  type: GET_POST_ALL,
+export const getPostsAction = () => ({
+  type: GET_POSTS,
 });
 
-export const getPostAreaAction = (area) => ({
-  type: GET_POST_AREA,
+export const getPostsAreaAction = (area) => ({
+  type: GET_POSTS_AREA,
   area,
 });
 
@@ -36,7 +35,7 @@ export function* sagaGetPost(action) {
       data,
     });
   } catch (err) {
-    console.log(`getPost Error 🚫 `, err);
+    console.log(`sagaGetPost Error 🚫 `, err);
     yield put({
       type: GET_POST_FAILED,
       error: err,
@@ -44,33 +43,33 @@ export function* sagaGetPost(action) {
   }
 }
 
-export function* sagaGetPostAll() {
+export function* sagaGetPosts(action) {
   try {
-    const { data } = yield call(reqGetAllPost);
+    const { data } = yield call(reqGetPosts);
     yield put({
-      type: GET_POST_ALL_SUCCESS,
+      type: GET_POSTS_SUCCESS,
       data,
     });
   } catch (err) {
-    console.log(`getPostAll Error 🚫 `, err);
+    console.log(`sagaGetPosts Error 🚫 `, err);
     yield put({
-      type: GET_POST_ALL_FAILED,
+      type: GET_POSTS_FAILED,
       error: err,
     });
   }
 }
 
-export function* sagaGetPostArea(action) {
+export function* sagaGetPostsArea(action) {
   try {
-    const { data } = yield call(reqGetPostArea, action.area);
+    const { data } = yield call(reqGetPosts, action.area);
     yield put({
-      type: GET_POST_AREA_SUCCESS,
+      type: GET_POSTS_SUCCESS,
       data,
     });
   } catch (err) {
-    console.log(`getPostAll Error 🚫 `, err);
+    console.log(`sagaGetPostsArea Error 🚫 `, err);
     yield put({
-      type: GET_POST_AREA_FAILED,
+      type: GET_POSTS_FAILED,
       error: err,
     });
   }
@@ -105,35 +104,23 @@ export const postReducer = (state = initValue, action) => {
         isLoading: false,
         error: action.error,
       };
-    case GET_POST_ALL:
+    case GET_POSTS:
       return {
         ...state,
         isLoadingAll: true,
       };
-    case GET_POST_ALL_SUCCESS:
+    case GET_POSTS_AREA:
+      return {
+        ...state,
+        isLoadingAll: true,
+      };
+    case GET_POSTS_SUCCESS:
       return {
         ...state,
         isLoadingAll: false,
         postAll: action.data,
       };
-    case GET_POST_ALL_FAILED:
-      return {
-        ...state,
-        isLoadingAll: false,
-        error: action.error,
-      };
-    case GET_POST_AREA:
-      return {
-        ...state,
-        isLoadingAll: true,
-      };
-    case GET_POST_AREA_SUCCESS:
-      return {
-        ...state,
-        isLoadingAll: false,
-        postAll: action.data,
-      };
-    case GET_POST_AREA_FAILED:
+    case GET_POSTS_FAILED:
       return {
         ...state,
         isLoadingAll: false,
@@ -147,6 +134,6 @@ export const postReducer = (state = initValue, action) => {
 // Watcher
 export function* postWatcher() {
   yield takeLatest(GET_POST, sagaGetPost);
-  yield takeLatest(GET_POST_ALL, sagaGetPostAll);
-  yield takeLatest(GET_POST_AREA, sagaGetPostArea);
+  yield takeLatest(GET_POSTS, sagaGetPosts);
+  yield takeLatest(GET_POSTS_AREA, sagaGetPostsArea);
 }

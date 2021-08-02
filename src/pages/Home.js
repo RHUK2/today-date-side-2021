@@ -85,16 +85,16 @@ function Home({ isLoadingAll, onGoPost, onChangeArea }) {
         <S.PostContainer>
           <S.Title>데이트 장소를 공유해봐요.</S.Title>
           <S.Select onChange={onChangeArea}>
-            <option>전체</option>
-            <option>서울</option>
-            <option>부산</option>
-            <option>제주도</option>
-            <option>강원도</option>
-            <option>경기도</option>
-            <option>인천</option>
-            <option>경상도</option>
-            <option>전라도</option>
-            <option>충청도</option>
+            <option value="">전체</option>
+            <option value="서울">서울</option>
+            <option value="부산">부산</option>
+            <option value="제주도">제주도</option>
+            <option value="강원도">강원도</option>
+            <option value="경기도">경기도</option>
+            <option value="인천">인천</option>
+            <option value="경상도">경상도</option>
+            <option value="전라도">전라도</option>
+            <option value="충청도">충청도</option>
           </S.Select>
           {isLoadingAll ? null : <PostBoxContainer />}
         </S.PostContainer>

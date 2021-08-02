@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getPostAllAction, getPostAreaAction } from '../reducers/postReducer';
+import { getPostsAction, getPostsAreaAction } from '../reducers/postReducer';
 import Home from '../pages/Home';
 
 function HomeContainer({ history }) {
@@ -9,20 +9,20 @@ function HomeContainer({ history }) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getPostAllAction());
+    dispatch(getPostsAction());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const onChangeArea = (e) => {
     const { value: area } = e.target;
-    dispatch(getPostAreaAction(area));
+    dispatch(getPostsAreaAction(area));
   };
 
   const onGoPost = () => {
     if (!isLoggedIn) {
       history.push('/login');
     } else {
-      history.push('/post/write');
+      history.push('/post/upload');
     }
   };
 

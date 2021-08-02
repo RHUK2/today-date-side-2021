@@ -104,7 +104,7 @@ S.ShareBtn = styled.button`
   font-size: 2.5rem;
 `;
 
-function PostWrite({ postInfo, onHandleChange, onHandleSubmit }) {
+function PostEdit({ postInfo, onHandleChange, onHandleSubmit }) {
   return (
     <Layout>
       <S.Section>
@@ -118,16 +118,22 @@ function PostWrite({ postInfo, onHandleChange, onHandleSubmit }) {
             placeholder="제목"
             required
           />
-          <S.Select selected name="area" onChange={onHandleChange}>
-            <option>서울</option>
-            <option>부산</option>
-            <option>제주도</option>
-            <option>강원도</option>
-            <option>경기도</option>
-            <option>인천</option>
-            <option>경상도</option>
-            <option>전라도</option>
-            <option>충청도</option>
+          <S.Select
+            value={postInfo.area}
+            name="area"
+            onChange={onHandleChange}
+            required
+          >
+            <option value="">위치</option>
+            <option value="서울">서울</option>
+            <option value="부산">부산</option>
+            <option value="제주도">제주도</option>
+            <option value="강원도">강원도</option>
+            <option value="경기도">경기도</option>
+            <option value="인천">인천</option>
+            <option value="경상도">경상도</option>
+            <option value="전라도">전라도</option>
+            <option value="충청도">충청도</option>
           </S.Select>
           <S.FileBox>
             <S.Label htmlFor="input-file">이미지 업로드</S.Label>
@@ -160,4 +166,4 @@ function PostWrite({ postInfo, onHandleChange, onHandleSubmit }) {
   );
 }
 
-export default PostWrite;
+export default PostEdit;

@@ -1,14 +1,16 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
-import { reqGetLogout, reqGetUser, reqPostLogin } from '../api/userApi';
+import { reqGetLogout, reqGetAuth, reqPostLogin } from '../api/userApi';
 
 // action.type config
 const LOGIN = 'LOGIN';
 const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 const LOGIN_FAILED = 'LOGIN_FAILED';
+
 const LOGOUT = 'LOGOUT';
 const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
 const LOGOUT_FAILED = 'LOGOUT_FAILED';
-const LOGIN_CHECK = 'LOGIN_CHECK';
+
+const AUTH = 'AUTH';
 
 // Action
 export const loginAction = (email, password) => ({
@@ -17,9 +19,9 @@ export const loginAction = (email, password) => ({
   password,
 });
 
-export const loginCheckAction = () => ({ type: LOGIN_CHECK });
-
 export const logoutAction = () => ({ type: LOGOUT });
+
+export const AuthAction = () => ({ type: AUTH });
 
 // Worker
 function* sagaPostLogin(action) {
@@ -59,9 +61,9 @@ function* sagaGetLogout() {
   }
 }
 
-function* sagaGetUser() {
+function* sagaGetAuth() {
   try {
-    const { data: user } = yield call(reqGetUser);
+    const { data: user } = yield call(reqGetAuth);
     if (user) {
       yield put({
         type: LOGIN_SUCCESS,
@@ -92,7 +94,7 @@ export const userReducer = (state = initValue, action) => {
         ...state,
         isLoading: true,
       };
-    case LOGIN_CHECK:
+    case AUTH:
       return {
         ...state,
         isLoading: true,
@@ -138,5 +140,5 @@ export const userReducer = (state = initValue, action) => {
 export function* userWatcher() {
   yield takeLatest(LOGIN, sagaPostLogin);
   yield takeLatest(LOGOUT, sagaGetLogout);
-  yield takeLatest(LOGIN_CHECK, sagaGetUser);
+  yield takeLatest(AUTH, sagaGetAuth);
 }
