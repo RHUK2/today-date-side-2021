@@ -28,3 +28,9 @@ export const reqPutPostModify = (_id, data) => {
     withCredentials: true,
   });
 };
+
+export const reqDelPost = (_id) => {
+  return api.delete(`/post/${_id}`, {
+    withCredentials: true,
+  });
+};

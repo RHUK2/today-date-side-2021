@@ -94,7 +94,7 @@ S.Description = styled.p`
   white-space: pre-wrap;
 `;
 
-function PostDetail({ isLoggedIn, isLoading, user, post }) {
+function PostDetail({ isLoggedIn, isLoading, user, post, onPostDelete }) {
   const settings = {
     dots: true,
     infinite: true,
@@ -125,7 +125,7 @@ function PostDetail({ isLoggedIn, isLoading, user, post }) {
               <Link to={`/post/${post._id}/edit`}>
                 <button>수정</button>
               </Link>
-              <button>삭제</button>
+              <button onClick={onPostDelete}>삭제</button>
             </S.BtnBox>
           )}
         </S.TitleBox>

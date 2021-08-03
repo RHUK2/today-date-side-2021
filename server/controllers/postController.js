@@ -1,6 +1,11 @@
+import { s3 } from '../middleware';
 import Post from '../models/Post';
+import User from '../models/User';
 
 export const resPostUpload = async (req, res) => {
+  if (!req.user) {
+    res.status(404);
+  }
   const {
     body: { title, description, area },
     files,
@@ -54,6 +59,9 @@ export const resGetPosts = async (req, res) => {
 };
 
 export const resPutPostModify = async (req, res) => {
+  if (!req.user) {
+    res.status(404);
+  }
   const {
     params: { id },
     body: { title, description, area },
@@ -63,5 +71,37 @@ export const resPutPostModify = async (req, res) => {
     res.send('Modify Success');
   } catch (err) {
     console.log('resPutPostModify Error 🚫 ', err);
+  }
+};
+
+export const resDelPost = async (req, res) => {
+  if (!req.user) {
+    res.status(404);
+  }
+  const {
+    params: { id },
+  } = req;
+  try {
+    const post = await Post.findById(id);
+    post.imgURL.forEach((imageUrl) => {
+      const key = imageUrl.split('/image/')[1];
+      s3.deleteObject(
+        {
+          Bucket: 'today-date-side',
+          Key: `image/${key}`,
+        },
+        (err, data) => {
+          if (err) console.log(err, err.stack);
+          else console.log(data);
+        },
+      );
+    });
+    const user = await User.findById(post.creator);
+    user.post = user.post.filter((elem) => elem.toString() !== id);
+    await user.save();
+    await Post.findByIdAndRemove(id);
+    res.send('Delete Success');
+  } catch (err) {
+    console.log('resDelPost Err 🚫', err);
   }
 };

@@ -1,5 +1,6 @@
 import express from 'express';
 import {
+  resDelPost,
   resGetPost,
   resGetPosts,
   resPostUpload,
@@ -30,5 +31,7 @@ apiRouter.get('/post/:id', resGetPost);
 apiRouter.get('/posts', resGetPosts);
 
 apiRouter.put('/post/:id/edit', resPutPostModify);
+
+apiRouter.delete('/post/:id', resDelPost);
 
 export default apiRouter;
