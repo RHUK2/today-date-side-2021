@@ -57,7 +57,7 @@ S.NoDataContainer = styled.div`
   font-size: 3rem;
 `;
 
-function PostBox({ currentPageData, pageCount, onChangePage }) {
+function PostBox({ currentPageData, pageCount, onChangePage, onChangeArea }) {
   if (!currentPageData.length) {
     return <S.NoDataContainer>작성된 게시글이 없습니다.</S.NoDataContainer>;
   }

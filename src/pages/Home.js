@@ -69,7 +69,7 @@ S.Select = styled.select`
   margin-bottom: 2rem;
 `;
 
-function Home({ isLoading, onGoPost, onChangeArea }) {
+function Home({ isLoading, posts, onGoPost, onChangeArea }) {
   return (
     <Layout>
       <S.Main>
@@ -96,7 +96,7 @@ function Home({ isLoading, onGoPost, onChangeArea }) {
             <option value="전라도">전라도</option>
             <option value="충청도">충청도</option>
           </S.Select>
-          {isLoading ? null : <PostBoxContainer />}
+          {!isLoading && posts && <PostBoxContainer />}
         </S.PostContainer>
       </S.Main>
     </Layout>

@@ -41,7 +41,6 @@ export const resGetPosts = async (req, res) => {
     query: { area },
   } = req;
   let posts = null;
-  console.log(area);
   try {
     if (!area) {
       posts = await Post.find({}).populate('creator');
@@ -51,5 +50,18 @@ export const resGetPosts = async (req, res) => {
     res.send(posts);
   } catch (err) {
     console.log('resGetPosts Error 🚫 ', err);
+  }
+};
+
+export const resPutPostModify = async (req, res) => {
+  const {
+    params: { id },
+    body: { title, description, area },
+  } = req;
+  try {
+    await Post.findByIdAndUpdate(id, { title, description, area });
+    res.send('Modify Success');
+  } catch (err) {
+    console.log('resPutPostModify Error 🚫 ', err);
   }
 };

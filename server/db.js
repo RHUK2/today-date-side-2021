@@ -8,6 +8,7 @@ dotenv.config();
 mongoose.connect(process.env.MONGO_ACCESS_KEY, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
+  useFindAndModify: false,
 });
 
 // 보류중인 연결을 인스턴스에 담음

@@ -3,6 +3,7 @@ import {
   resGetPost,
   resGetPosts,
   resPostUpload,
+  resPutPostModify,
 } from '../controllers/postController';
 import {
   resGetLogout,
@@ -27,5 +28,7 @@ apiRouter.post('/upload', multerImg.array('fileImg'), resPostUpload);
 apiRouter.get('/post/:id', resGetPost);
 
 apiRouter.get('/posts', resGetPosts);
+
+apiRouter.put('/post/:id/edit', resPutPostModify);
 
 export default apiRouter;

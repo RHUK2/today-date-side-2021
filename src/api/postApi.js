@@ -22,3 +22,9 @@ export const reqGetPosts = (area) => {
     },
   });
 };
+
+export const reqPutPostModify = (_id, data) => {
+  return api.put(`/post/${_id}/edit`, data, {
+    withCredentials: true,
+  });
+};

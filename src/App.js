@@ -17,7 +17,13 @@ import PostEditContainer from './containers/PostEditContainer';
 import Loader from './components/Loader';
 
 const PrivateRoute = ({ component: Component, ...parentProps }) => {
-  const { isLoggedIn } = useSelector((state) => state.userReducer);
+  const { isLoggedIn, user } = useSelector((state) => state.userReducer);
+  if (
+    parentProps.computedMatch.params.id &&
+    !user.post.includes(parentProps.computedMatch.params.id)
+  ) {
+    return <Redirect to="/" />;
+  }
   return (
     <>
       <Route
@@ -63,7 +69,7 @@ function App() {
         <PublicRoute path="/login" component={LoginContainer} />
         <PublicRoute path="/join" component={JoinContainer} />
         <PrivateRoute path="/post/upload" component={PostUploadContainer} />
-        <Route path="/post/:id/edit" component={PostEditContainer} />
+        <PrivateRoute path="/post/:id/edit" component={PostEditContainer} />
         <Route path="/post/:id" component={PostDetailContainer} />
         <Redirect from="*" to="/" />
       </Switch>

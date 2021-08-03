@@ -44,52 +44,6 @@ S.Select = styled.select`
   font-size: 1.5rem;
 `;
 
-S.Label = styled.label`
-  display: block;
-  width: 150px;
-  padding: 1rem;
-
-  background-color: #222021;
-  border-radius: 0.5rem;
-  text-align: center;
-  font-size: 2rem;
-  color: white;
-  cursor: pointer;
-`;
-
-S.FileBox = styled.div`
-  position: relative;
-`;
-
-S.InputFile = styled.input`
-  // display: "none", visibility: "hidden" 으로 하면 유효성 검사 안되는 에러
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: -1;
-
-  opacity: 0;
-  width: 150px;
-  height: 40px;
-`;
-
-S.previewBox = styled.div`
-  padding-top: 2rem;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, 200px);
-  gap: 1rem;
-`;
-
-S.Preview = styled.img`
-  width: 100%;
-  height: 200px;
-
-  object-fit: contain;
-  border: 1px solid black;
-  background-color: whitesmoke;
-  border-radius: 0.5rem;
-`;
-
 S.TextArea = styled.textarea`
   border: 1px solid black;
   padding: 1rem;
@@ -108,7 +62,7 @@ function PostEdit({ postInfo, onHandleChange, onHandleSubmit }) {
   return (
     <Layout>
       <S.Section>
-        <S.Title>공유 글쓰기</S.Title>
+        <S.Title>수정하기</S.Title>
         <S.Form onSubmit={onHandleSubmit}>
           <S.InputTitle
             name="title"
@@ -135,23 +89,6 @@ function PostEdit({ postInfo, onHandleChange, onHandleSubmit }) {
             <option value="전라도">전라도</option>
             <option value="충청도">충청도</option>
           </S.Select>
-          <S.FileBox>
-            <S.Label htmlFor="input-file">이미지 업로드</S.Label>
-            <S.InputFile
-              id="input-file"
-              onChange={onHandleChange}
-              type="file"
-              accept="image/*"
-              multiple
-              required
-            />
-            <S.previewBox>
-              {postInfo.previewImg &&
-                postInfo.previewImg.map((img, idx) => (
-                  <S.Preview key={idx} src={img} alt="" />
-                ))}
-            </S.previewBox>
-          </S.FileBox>
           <S.TextArea
             name="description"
             value={postInfo.description}
@@ -159,7 +96,7 @@ function PostEdit({ postInfo, onHandleChange, onHandleSubmit }) {
             placeholder="내용"
             required
           ></S.TextArea>
-          <S.ShareBtn>공유하기</S.ShareBtn>
+          <S.ShareBtn>수정 완료</S.ShareBtn>
         </S.Form>
       </S.Section>
     </Layout>

@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import Layout from '../layouts/Layout';
-import Loader from '../components/Loader';
 import Slider from 'react-slick';
 import Moment from 'react-moment';
 import { Link } from 'react-router-dom';
@@ -12,8 +11,6 @@ S.Section = styled.section`
   max-width: 800px;
   margin: 80px auto 0px auto;
   padding: 5rem 0;
-
-  /* background-color: teal; */
 `;
 
 S.InfoBox = styled.div`
@@ -106,10 +103,7 @@ function PostDetail({ isLoggedIn, isLoading, user, post }) {
     slidesToScroll: 1,
   };
 
-  if (isLoading) {
-    return <Loader />;
-  }
-  if (!post) {
+  if (isLoading || !post) {
     return null;
   }
   return (

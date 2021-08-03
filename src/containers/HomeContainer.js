@@ -1,15 +1,22 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getPostsAction, getPostsAreaAction } from '../reducers/postReducer';
 import Home from '../pages/Home';
+import {
+  getPostsAction,
+  getPostsAreaAction,
+  initIsLoading,
+} from '../reducers/postReducer';
 
 function HomeContainer({ history }) {
   const { isLoggedIn } = useSelector((state) => state.userReducer);
-  const { isLoading } = useSelector((state) => state.postReducer);
+  const { isLoading, posts } = useSelector((state) => state.postReducer);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getPostsAction());
+    return () => {
+      dispatch(initIsLoading());
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -29,6 +36,7 @@ function HomeContainer({ history }) {
   return (
     <Home
       isLoading={isLoading}
+      posts={posts}
       onGoPost={onGoPost}
       onChangeArea={onChangeArea}
     />
