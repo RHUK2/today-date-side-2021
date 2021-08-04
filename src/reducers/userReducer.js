@@ -1,60 +1,27 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
-import { reqGetLogout, reqGetAuth, reqPostLogin } from '../api/userApi';
+import { reqGetLogout, reqGetAuth } from '../api/userApi';
 
 // action.type config
-const LOGIN = 'LOGIN';
-const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
-const LOGIN_FAILED = 'LOGIN_FAILED';
+const AUTH = 'AUTH';
+const AUTH_SUCCESS = 'AUTH_SUCCESS';
+const AUTH_FAILED = 'AUTH_FAILED';
 
 const LOGOUT = 'LOGOUT';
 const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
 const LOGOUT_FAILED = 'LOGOUT_FAILED';
 
-const AUTH = 'AUTH';
-
 // Action
-export const loginAction = (email, password) => ({
-  type: LOGIN,
-  email,
-  password,
-});
-
 export const logoutAction = () => ({ type: LOGOUT });
 
-export const AuthAction = () => ({ type: AUTH });
+export const authAction = () => ({ type: AUTH });
 
 // Worker
-function* sagaPostLogin(action) {
-  try {
-    const { data: user } = yield call(
-      reqPostLogin,
-      action.email,
-      action.password,
-    );
-    if (user) {
-      yield put({
-        type: LOGIN_SUCCESS,
-        user,
-      });
-    } else {
-      yield put({
-        type: LOGIN_FAILED,
-        error: 'User is not exist.',
-      });
-    }
-  } catch (err) {
-    console.log('Login Error 🚫 ', err);
-    yield put({
-      type: LOGIN_FAILED,
-      error: err,
-    });
-  }
-}
-
 function* sagaGetLogout() {
   try {
-    yield call(reqGetLogout);
-    yield put({ type: LOGOUT_SUCCESS });
+    const { status } = yield call(reqGetLogout);
+    if (status === 200) {
+      yield put({ type: LOGOUT_SUCCESS });
+    }
   } catch (err) {
     console.log('Logout Error 🚫 ', err);
     yield put({ type: LOGOUT_FAILED });
@@ -63,18 +30,20 @@ function* sagaGetLogout() {
 
 function* sagaGetAuth() {
   try {
-    const { data: user } = yield call(reqGetAuth);
+    const {
+      data: { user },
+    } = yield call(reqGetAuth);
     if (user) {
       yield put({
-        type: LOGIN_SUCCESS,
+        type: AUTH_SUCCESS,
         user,
       });
     } else {
-      yield put({ type: LOGIN_FAILED, error: 'User is not logged In.' });
+      yield put({ type: AUTH_FAILED, error: 'No User' });
     }
   } catch (err) {
     console.log('Login Check Error 🚫', err);
-    yield put({ type: LOGIN_FAILED, error: err });
+    yield put({ type: AUTH_FAILED, error: err });
   }
 }
 
@@ -89,27 +58,24 @@ const initValue = {
 // Reducer
 export const userReducer = (state = initValue, action) => {
   switch (action.type) {
-    case LOGIN:
-      return {
-        ...state,
-        isLoading: true,
-      };
     case AUTH:
       return {
         ...state,
         isLoading: true,
       };
-    case LOGIN_SUCCESS:
+    case AUTH_SUCCESS:
       return {
         ...state,
         isLoading: false,
         isLoggedIn: true,
         user: action.user,
+        error: null,
       };
-    case LOGIN_FAILED:
+    case AUTH_FAILED:
       return {
         ...state,
         isLoading: false,
+        user: null,
         error: action.error,
       };
     case LOGOUT:
@@ -123,6 +89,7 @@ export const userReducer = (state = initValue, action) => {
         isLoading: false,
         isLoggedIn: false,
         user: null,
+        error: null,
       };
     case LOGOUT_FAILED:
       return {
@@ -138,7 +105,6 @@ export const userReducer = (state = initValue, action) => {
 
 // Watcher
 export function* userWatcher() {
-  yield takeLatest(LOGIN, sagaPostLogin);
-  yield takeLatest(LOGOUT, sagaGetLogout);
   yield takeLatest(AUTH, sagaGetAuth);
+  yield takeLatest(LOGOUT, sagaGetLogout);
 }

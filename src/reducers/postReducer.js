@@ -35,10 +35,12 @@ export const initIsLoading = () => ({
 // Worker
 export function* sagaGetPost(action) {
   try {
-    const { data } = yield call(reqGetPost, action._id);
+    const {
+      data: { post },
+    } = yield call(reqGetPost, action._id);
     yield put({
       type: GET_POST_SUCCESS,
-      data,
+      post,
     });
   } catch (err) {
     console.log(`sagaGetPost Error 🚫 `, err);
@@ -51,10 +53,12 @@ export function* sagaGetPost(action) {
 
 export function* sagaGetPosts(action) {
   try {
-    const { data } = yield call(reqGetPosts);
+    const {
+      data: { posts },
+    } = yield call(reqGetPosts);
     yield put({
       type: GET_POSTS_SUCCESS,
-      data,
+      posts,
     });
   } catch (err) {
     console.log(`sagaGetPosts Error 🚫 `, err);
@@ -67,10 +71,12 @@ export function* sagaGetPosts(action) {
 
 export function* sagaGetPostsArea(action) {
   try {
-    const { data } = yield call(reqGetPosts, action.area);
+    const {
+      data: { posts },
+    } = yield call(reqGetPosts, action.area);
     yield put({
       type: GET_POSTS_SUCCESS,
-      data,
+      posts,
     });
   } catch (err) {
     console.log(`sagaGetPostsArea Error 🚫 `, err);
@@ -101,12 +107,14 @@ export const postReducer = (state = initValue, action) => {
       return {
         ...state,
         isLoading: false,
-        post: action.data,
+        post: action.post,
+        error: null,
       };
     case GET_POST_FAILED:
       return {
         ...state,
         isLoading: false,
+        post: null,
         error: action.error,
       };
     case GET_POSTS:
@@ -123,12 +131,14 @@ export const postReducer = (state = initValue, action) => {
       return {
         ...state,
         isLoading: false,
-        posts: action.data,
+        posts: action.posts,
+        error: null,
       };
     case GET_POSTS_FAILED:
       return {
         ...state,
         isLoading: false,
+        posts: null,
         error: action.error,
       };
     case INIT_ISLOADING:

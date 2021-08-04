@@ -4,7 +4,8 @@ import User from '../models/User';
 
 export const resPostUpload = async (req, res) => {
   if (!req.user) {
-    res.status(404);
+    res.status(400).end();
+    return;
   }
   const {
     body: { title, description, area },
@@ -13,6 +14,7 @@ export const resPostUpload = async (req, res) => {
   } = req;
   const imgURL = files.map((file) => file.location);
   try {
+    // 새 포스트
     const newPost = new Post({
       title,
       description,
@@ -21,11 +23,13 @@ export const resPostUpload = async (req, res) => {
       creator: user._id,
     });
     await newPost.save();
+    // 작성자에게 포스트 주입
     req.user.post.push(newPost._id);
     await req.user.save();
-    res.send(newPost._id);
+    res.status(200).json({ id: newPost._id });
   } catch (err) {
     console.log('resPostUpload Error 🚫', err);
+    res.status(400).end();
   }
 };
 
@@ -35,9 +39,10 @@ export const resGetPost = async (req, res) => {
   } = req;
   try {
     const post = await Post.findById(id).populate('creator');
-    res.send(post);
+    res.status(200).json({ post: post });
   } catch (err) {
     console.log('resGetPost Error 🚫 ', err);
+    res.status(400).end();
   }
 };
 
@@ -52,15 +57,17 @@ export const resGetPosts = async (req, res) => {
     } else {
       posts = await Post.find({ area }).populate('creator');
     }
-    res.send(posts);
+    res.status(200).json({ posts: posts });
   } catch (err) {
     console.log('resGetPosts Error 🚫 ', err);
+    res.status(400).end();
   }
 };
 
 export const resPutPostModify = async (req, res) => {
   if (!req.user) {
-    res.status(404);
+    res.status(400).end();
+    return;
   }
   const {
     params: { id },
@@ -68,15 +75,17 @@ export const resPutPostModify = async (req, res) => {
   } = req;
   try {
     await Post.findByIdAndUpdate(id, { title, description, area });
-    res.send('Modify Success');
+    res.status(200).end();
   } catch (err) {
     console.log('resPutPostModify Error 🚫 ', err);
+    res.status(400).end();
   }
 };
 
 export const resDelPost = async (req, res) => {
   if (!req.user) {
-    res.status(404);
+    res.status(400).end();
+    return;
   }
   const {
     params: { id },
@@ -100,8 +109,9 @@ export const resDelPost = async (req, res) => {
     user.post = user.post.filter((elem) => elem.toString() !== id);
     await user.save();
     await Post.findByIdAndRemove(id);
-    res.send('Delete Success');
+    res.status(200).end();
   } catch (err) {
     console.log('resDelPost Err 🚫', err);
+    res.status(400).end();
   }
 };

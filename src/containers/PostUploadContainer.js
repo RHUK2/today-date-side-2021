@@ -1,6 +1,8 @@
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { reqPostUpload } from '../api/postApi';
 import PostUpload from '../pages/PostUpload';
+import { authAction } from '../reducers/userReducer';
 
 function PostUploadContainer({ history }) {
   const [postInfo, setPostInfo] = useState({
@@ -10,6 +12,7 @@ function PostUploadContainer({ history }) {
     fileImg: '',
     previewImg: '',
   });
+  const dispatch = useDispatch();
 
   const onHandleChange = (e) => {
     if (e.target.type === 'file') {
@@ -46,10 +49,15 @@ function PostUploadContainer({ history }) {
     }
 
     try {
-      const { data: _id } = await reqPostUpload(formData);
-      history.push(`/post/${_id}`);
+      const {
+        data: { id },
+      } = await reqPostUpload(formData);
+      // user post 목록 업데이트
+      dispatch(authAction());
+      history.push(`/post/${id}`);
     } catch (err) {
       console.log('PostUpload Error 🚫 ', err);
+      history.push('/');
     }
   };
 

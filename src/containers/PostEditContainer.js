@@ -15,16 +15,14 @@ function PostEditContainer({ history, match }) {
   });
 
   useEffect(() => {
-    if (!user.post.includes(id)) {
-      history.push('/');
-    } else {
-      getPost();
-    }
+    getPost();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const getPost = async () => {
-    const { data: post } = await reqGetPost(id);
+    const {
+      data: { post },
+    } = await reqGetPost(id);
     setPostInfo((prevState) => ({
       ...prevState,
       title: post.title,
@@ -46,6 +44,7 @@ function PostEditContainer({ history, match }) {
       history.push(`/post/${id}`);
     } catch (err) {
       console.log('PostUpload Error 🚫 ', err);
+      alert('업로드에 실패했습니다.');
     }
   };
 

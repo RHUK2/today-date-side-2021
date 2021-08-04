@@ -1,8 +1,9 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
 
-import { loginAction } from '../reducers/userReducer';
 import Login from '../pages/Login';
+import { reqPostLogin } from '../api/userApi';
+import { useDispatch } from 'react-redux';
+import { authAction } from '../reducers/userReducer';
 
 function LoginContainer({ history }) {
   const [userInput, setUserInput] = useState({
@@ -16,11 +17,16 @@ function LoginContainer({ history }) {
     setUserInput((prevState) => ({ ...prevState, [name]: value }));
   };
 
-  const onSubmitLogin = (e) => {
+  const onSubmitLogin = async (e) => {
     e.preventDefault();
     const { email, password } = userInput;
-    dispatch(loginAction(email, password));
-    history.push('/');
+    try {
+      await reqPostLogin(email, password);
+      dispatch(authAction());
+      history.push('/');
+    } catch (err) {
+      alert('로그인에 실패했습니다.\n이메일과 비밀번호를 확인해주세요.');
+    }
   };
 
   return <Login onChange={onChange} onSubmitLogin={onSubmitLogin} />;

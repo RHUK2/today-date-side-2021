@@ -1,8 +1,9 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import Layout from '../layouts/Layout';
 import Slider from 'react-slick';
 import Moment from 'react-moment';
-import { Link } from 'react-router-dom';
+
+import Layout from '../layouts/Layout';
 
 const S = {};
 

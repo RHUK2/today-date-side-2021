@@ -39,10 +39,11 @@ function JoinContainer({ history }) {
     e.preventDefault();
     try {
       await reqPostJoin(userInfo);
-      alert('회원가입이 완료되었습니다.');
+      alert('회원가입이 완료되었습니다.\n로그인 페이지로 이동합니다.');
       history.push('/login');
     } catch (err) {
       console.log('Join Error 🚫 ', err);
+      history.push('/');
     }
   };
 

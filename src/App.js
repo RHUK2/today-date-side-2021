@@ -5,7 +5,7 @@ import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 
 import GlobalStyles from './GlobalStyles';
 
-import { AuthAction } from './reducers/userReducer';
+import { authAction } from './reducers/userReducer';
 
 import HomeContainer from './containers/HomeContainer';
 import JoinContainer from './containers/JoinContainer';
@@ -55,7 +55,7 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(AuthAction());
+    dispatch(authAction());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

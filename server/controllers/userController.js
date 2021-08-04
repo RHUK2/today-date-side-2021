@@ -14,9 +14,10 @@ export const resPostJoin = async (req, res) => {
       nickname,
     });
     await newUser.save();
-    res.send('Join Success!');
+    res.status(200).end();
   } catch (err) {
     console.log('resPostJoin Error 🚫 ', err);
+    res.status(400).end();
   }
 };
 
@@ -25,30 +26,31 @@ export const resPostLogin = (req, res, next) => {
   // passport.js에 정의되어 있는 local 전략에 따른 유효성 검사 진행
   passport.authenticate('local', (err, user, info) => {
     if (err) {
-      next(err);
+      res.status(400).end();
     }
     if (!user) {
-      res.send(user);
+      res.status(400).end();
     }
     // serializer & deserializer 함수 실행
     req.logIn(user, function (err) {
       if (err) {
-        next(err);
+        res.status(400).end();
+      } else {
+        res.status(200).end();
       }
-      res.send(user);
     });
   })(req, res, next);
 };
 
 // 로그아웃 로직
 export const resGetLogout = (req, res) => {
-  req.session.destroy();
   req.logout();
+  req.session.destroy();
   res.clearCookie('session_id');
-  res.send('Logout Success!');
+  res.status(200).end();
 };
 
 // 인증 로직
 export const resGetAuth = (req, res) => {
-  res.send(req.user);
+  res.status(200).json({ user: req.user });
 };
