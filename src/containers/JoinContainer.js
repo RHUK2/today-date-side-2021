@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 import { useState } from 'react';
-
 import { reqPostJoin } from '../api/userApi';
 import Join from '../pages/Join';
 

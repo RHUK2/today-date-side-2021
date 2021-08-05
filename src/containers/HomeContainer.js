@@ -1,11 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { getPostsAction, initIsLoading } from '../reducers/postReducer';
 import Home from '../pages/Home';
-import {
-  getPostsAction,
-  getPostsAreaAction,
-  initIsLoading,
-} from '../reducers/postReducer';
 
 function HomeContainer({ history }) {
   const { isLoggedIn } = useSelector((state) => state.userReducer);

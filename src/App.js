@@ -2,10 +2,10 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
+import { authAction } from './reducers/userReducer';
 
 import GlobalStyles from './GlobalStyles';
-
-import { authAction } from './reducers/userReducer';
+import Loader from './components/Loader';
 
 import HomeContainer from './containers/HomeContainer';
 import JoinContainer from './containers/JoinContainer';
@@ -14,8 +14,7 @@ import MypageContainer from './containers/MypageContainer';
 import PostUploadContainer from './containers/PostUploadContainer';
 import PostDetailContainer from './containers/PostDetailContainer';
 import PostEditContainer from './containers/PostEditContainer';
-
-import Loader from './components/Loader';
+import SearchContainer from './containers/SearchContainer';
 
 const PrivateRoute = ({ component: Component, ...parentProps }) => {
   const { isLoggedIn, user } = useSelector((state) => state.userReducer);
@@ -67,6 +66,7 @@ function App() {
     <BrowserRouter>
       <Switch>
         <Route exact path="/" component={HomeContainer} />
+        <Route path="/search" component={SearchContainer} />
         <PublicRoute path="/login" component={LoginContainer} />
         <PublicRoute path="/join" component={JoinContainer} />
         <PrivateRoute path="/mypage" component={MypageContainer} />

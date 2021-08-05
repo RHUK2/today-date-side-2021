@@ -48,15 +48,18 @@ export const resGetPost = async (req, res) => {
 
 export const resGetPosts = async (req, res) => {
   const {
-    query: { area, creatorID },
+    query: { area, creatorID, term },
   } = req;
-  console.log(area, creatorID);
   let posts = null;
   try {
     if (area) {
       posts = await Post.find({ area }).populate('creator');
     } else if (creatorID) {
       posts = await Post.find({ creator: creatorID }).populate('creator');
+    } else if (term) {
+      posts = await Post.find({
+        title: { $regex: term, $options: 'i' },
+      }).populate('creator');
     } else {
       posts = await Post.find({}).populate('creator');
     }

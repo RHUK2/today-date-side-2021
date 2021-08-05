@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 import Logo from '../components/Logo';
 import NavContainer from '../containers/NavContainer';
+import SearchBarContainer from '../containers/SearchBarContainer';
 
 const S = {};
 
@@ -60,10 +61,11 @@ function Header() {
     <S.Header>
       <S.HeaderContainer>
         <Logo margin={'0.5rem 0 0 0'} />
-        <S.SearchBox>
+        {/* <S.SearchBox>
           <i className="fas fa-search"></i>
           <S.Input name="term" type="title" placeholder="장소 검색" />
-        </S.SearchBox>
+        </S.SearchBox> */}
+        <SearchBarContainer />
         <NavContainer />
       </S.HeaderContainer>
     </S.Header>

@@ -44,7 +44,7 @@ function Menu() {
   return (
     <S.MenuContainer>
       <S.Menu>
-        <S.Link to="/post/upload">
+        <S.Link to="/mypage">
           <i className="far fa-smile"></i>
           <div>마이페이지</div>
         </S.Link>

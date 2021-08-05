@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-
 import { logoutAction } from '../reducers/userReducer';
 import { closeMenuAction, openMenuAction } from '../reducers/modalReducer';
 import Nav from '../components/Nav';

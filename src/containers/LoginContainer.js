@@ -1,9 +1,8 @@
 import { useState } from 'react';
-
-import Login from '../pages/Login';
-import { reqPostLogin } from '../api/userApi';
 import { useDispatch } from 'react-redux';
+import { reqPostLogin } from '../api/userApi';
 import { authAction } from '../reducers/userReducer';
+import Login from '../pages/Login';
 
 function LoginContainer({ history }) {
   const [userInput, setUserInput] = useState({
