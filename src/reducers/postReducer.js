@@ -7,7 +7,6 @@ const GET_POST_SUCCESS = 'GET_POST_SUCCESS';
 const GET_POST_FAILED = 'GET_POST_FAILED';
 
 const GET_POSTS = 'GET_POSTS';
-const GET_POSTS_AREA = 'GET_POSTS_AREA';
 const GET_POSTS_SUCCESS = 'GET_POSTS_SUCCESS';
 const GET_POSTS_FAILED = 'GET_POSTS_FAILED';
 
@@ -19,13 +18,9 @@ export const getPostAction = (_id) => ({
   _id,
 });
 
-export const getPostsAction = () => ({
+export const getPostsAction = (query) => ({
   type: GET_POSTS,
-});
-
-export const getPostsAreaAction = (area) => ({
-  type: GET_POSTS_AREA,
-  area,
+  query,
 });
 
 export const initIsLoading = () => ({
@@ -55,31 +50,13 @@ export function* sagaGetPosts(action) {
   try {
     const {
       data: { posts },
-    } = yield call(reqGetPosts);
+    } = yield call(reqGetPosts, action.query);
     yield put({
       type: GET_POSTS_SUCCESS,
       posts,
     });
   } catch (err) {
     console.log(`sagaGetPosts Error 🚫 `, err);
-    yield put({
-      type: GET_POSTS_FAILED,
-      error: err,
-    });
-  }
-}
-
-export function* sagaGetPostsArea(action) {
-  try {
-    const {
-      data: { posts },
-    } = yield call(reqGetPosts, action.area);
-    yield put({
-      type: GET_POSTS_SUCCESS,
-      posts,
-    });
-  } catch (err) {
-    console.log(`sagaGetPostsArea Error 🚫 `, err);
     yield put({
       type: GET_POSTS_FAILED,
       error: err,
@@ -122,11 +99,6 @@ export const postReducer = (state = initValue, action) => {
         ...state,
         isLoading: true,
       };
-    case GET_POSTS_AREA:
-      return {
-        ...state,
-        isLoading: true,
-      };
     case GET_POSTS_SUCCESS:
       return {
         ...state,
@@ -155,5 +127,4 @@ export const postReducer = (state = initValue, action) => {
 export function* postWatcher() {
   yield takeLatest(GET_POST, sagaGetPost);
   yield takeLatest(GET_POSTS, sagaGetPosts);
-  yield takeLatest(GET_POSTS_AREA, sagaGetPostsArea);
 }

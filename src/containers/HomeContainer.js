@@ -22,7 +22,7 @@ function HomeContainer({ history }) {
 
   const onChangeArea = (e) => {
     const { value: area } = e.target;
-    dispatch(getPostsAreaAction(area));
+    dispatch(getPostsAction({ area }));
   };
 
   const onGoPost = () => {

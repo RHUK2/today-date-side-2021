@@ -15,10 +15,10 @@ export const reqGetPost = (_id) => {
   return api.get(`/post/${_id}`);
 };
 
-export const reqGetPosts = (area) => {
+export const reqGetPosts = (query) => {
   return api.get('/posts', {
     params: {
-      area,
+      ...query,
     },
   });
 };

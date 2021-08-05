@@ -96,7 +96,7 @@ function Home({ isLoading, posts, onGoPost, onChangeArea }) {
             <option value="전라도">전라도</option>
             <option value="충청도">충청도</option>
           </S.Select>
-          {!isLoading && posts && <PostBoxContainer />}
+          {!isLoading && posts && <PostBoxContainer posts={posts} />}
         </S.PostContainer>
       </S.Main>
     </Layout>

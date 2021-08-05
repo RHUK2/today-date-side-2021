@@ -10,6 +10,7 @@ import { authAction } from './reducers/userReducer';
 import HomeContainer from './containers/HomeContainer';
 import JoinContainer from './containers/JoinContainer';
 import LoginContainer from './containers/LoginContainer';
+import MypageContainer from './containers/MypageContainer';
 import PostUploadContainer from './containers/PostUploadContainer';
 import PostDetailContainer from './containers/PostDetailContainer';
 import PostEditContainer from './containers/PostEditContainer';
@@ -68,6 +69,7 @@ function App() {
         <Route exact path="/" component={HomeContainer} />
         <PublicRoute path="/login" component={LoginContainer} />
         <PublicRoute path="/join" component={JoinContainer} />
+        <PrivateRoute path="/mypage" component={MypageContainer} />
         <PrivateRoute path="/post/upload" component={PostUploadContainer} />
         <PrivateRoute path="/post/:id/edit" component={PostEditContainer} />
         <Route path="/post/:id" component={PostDetailContainer} />

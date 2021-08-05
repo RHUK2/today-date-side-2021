@@ -36,12 +36,14 @@ S.PostInfo = styled.div`
 `;
 
 S.PaginateContainer = styled.div`
+  display: flex;
+  justify-content: center;
   .pagination-ul {
     display: flex;
     justify-content: space-between;
     font-size: 2rem;
     width: 250px;
-    margin: 5rem auto 0;
+    padding: 5rem auto 0;
   }
   li {
     cursor: pointer;

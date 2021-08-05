@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
 import { reqGetPost, reqPutPostModify } from '../api/postApi';
 import PostEdit from '../pages/PostEdit';
 
@@ -7,7 +6,6 @@ function PostEditContainer({ history, match }) {
   const {
     params: { id },
   } = match;
-  const { user } = useSelector((state) => state.userReducer);
   const [postInfo, setPostInfo] = useState({
     title: '',
     description: '',

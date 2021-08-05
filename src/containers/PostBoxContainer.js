@@ -1,10 +1,8 @@
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
 import PostBox from '../components/PostBox';
 
-function PostBoxContainer() {
+function PostBoxContainer({ posts }) {
   const [currentPage, setCurrentPage] = useState(0);
-  const { posts } = useSelector((state) => state.postReducer);
 
   const PER_PAGE = 12;
   const offset = currentPage * PER_PAGE;
