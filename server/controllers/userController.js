@@ -54,3 +54,20 @@ export const resGetLogout = (req, res) => {
 export const resGetAuth = (req, res) => {
   res.status(200).json({ user: req.user });
 };
+
+export const resGetNicknameCheck = async (req, res) => {
+  const {
+    query: { nickname },
+  } = req;
+  try {
+    const isNickname = await User.findOne({ nickname });
+    if (isNickname) {
+      res.status(200).json({ isNickname: true });
+    } else {
+      res.status(200).json({ isNickname: false });
+    }
+  } catch (err) {
+    console.log('resGetNicknameCheck Error 🚫', err);
+    res.status(400).end();
+  }
+};

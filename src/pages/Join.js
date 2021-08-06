@@ -62,7 +62,17 @@ S.Link = styled(Link)`
   font-size: 1.7rem;
 `;
 
-function Join({ userInfo, isSame, isFocus, onSubmitUserInfo, onChange }) {
+function Join({
+  userInfo,
+  isSame,
+  isFocus,
+  isFocusNickname,
+  existNickname,
+  onSubmitUserInfo,
+  onChange,
+  onHandleBlur,
+  onHandleFocus,
+}) {
   return (
     <S.Section>
       <S.JoinContainer>
@@ -78,6 +88,21 @@ function Join({ userInfo, isSame, isFocus, onSubmitUserInfo, onChange }) {
             onChange={onChange}
             required
           />
+          <S.Tag>별명 *</S.Tag>
+          <S.Input
+            name="nickname"
+            placeholder="별명 (2~15자)"
+            type="text"
+            value={userInfo.nickname}
+            onChange={onChange}
+            onBlur={onHandleBlur}
+            onFocus={onHandleFocus}
+            minLength="2"
+            required
+          />
+          {isFocusNickname && existNickname && (
+            <S.CheckMessage>닉네임이 이미 존재합니다.</S.CheckMessage>
+          )}
           <S.Tag>비밀번호 *</S.Tag>
           <S.Input
             name="password"
@@ -108,15 +133,7 @@ function Join({ userInfo, isSame, isFocus, onSubmitUserInfo, onChange }) {
                 비밀번호가 불일치합니다.
               </S.CheckMessage>
             ))}
-          <S.Tag>별명 *</S.Tag>
-          <S.Input
-            name="nickname"
-            placeholder="별명 (2~15자)"
-            type="text"
-            value={userInfo.nickname}
-            onChange={onChange}
-            required
-          />
+
           <S.JoinBtn>회원가입 완료</S.JoinBtn>
         </S.Form>
         <S.Link to="/login">로그인 화면으로 가기</S.Link>

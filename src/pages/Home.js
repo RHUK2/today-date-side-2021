@@ -64,8 +64,8 @@ S.Title = styled.h1`
 `;
 
 S.Select = styled.select`
-  padding: 0.5rem 1rem 0.4rem;
-  font-size: 1.5rem;
+  padding: 1rem 1rem 0.8rem;
+  font-size: 2rem;
   margin-bottom: 2rem;
 `;
 

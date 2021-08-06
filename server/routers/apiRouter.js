@@ -11,6 +11,7 @@ import {
   resGetAuth,
   resPostJoin,
   resPostLogin,
+  resGetNicknameCheck,
 } from '../controllers/userController';
 import { multerImg } from '../middleware';
 
@@ -23,6 +24,8 @@ apiRouter.post('/login', resPostLogin);
 apiRouter.get('/logout', resGetLogout);
 
 apiRouter.get('/auth', resGetAuth);
+
+apiRouter.get('/user/nickname', resGetNicknameCheck);
 
 apiRouter.post('/upload', multerImg.array('fileImg'), resPostUpload);
 

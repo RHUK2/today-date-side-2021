@@ -32,3 +32,11 @@ export const reqGetAuth = () => {
     withCredentials: true,
   });
 };
+
+export const reqGetNicknameCheck = (nickname) => {
+  return api.get('/user/nickname', {
+    params: {
+      nickname,
+    },
+  });
+};

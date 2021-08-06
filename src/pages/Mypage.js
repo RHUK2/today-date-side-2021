@@ -33,6 +33,10 @@ S.Email = styled.span`
   font-size: 2rem;
 `;
 
+S.Wrapper = styled.div`
+  padding: 0 2rem;
+`;
+
 function Mypage({ isLoading, posts, user }) {
   return (
     <Layout>
@@ -41,7 +45,9 @@ function Mypage({ isLoading, posts, user }) {
           <S.Title>{`${user.nickname}님의 페이지`}</S.Title>
           <S.Email>{`Email: ${user.email}`}</S.Email>
         </S.MypageHeader>
-        {!isLoading && posts && <PostBoxContainer posts={posts} />}
+        <S.Wrapper>
+          {!isLoading && posts && <PostBoxContainer posts={posts} />}
+        </S.Wrapper>
       </S.Main>
     </Layout>
   );

@@ -10,8 +10,7 @@ function SearchContainer({ location }) {
 
   useEffect(() => {
     dispatch(getPostsAction({ term: query }));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [query, dispatch]);
 
   return <Search isLoading={isLoading} posts={posts} query={query} />;
 }

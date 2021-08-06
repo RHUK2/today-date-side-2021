@@ -9,6 +9,12 @@ S.Main = styled.main`
   min-height: 100vh;
   max-width: 1600px;
   margin: 80px auto 0px auto;
+  padding: 0 2rem;
+`;
+
+S.Message = styled.div`
+  font-size: 3rem;
+  padding: 5rem 0 4.8rem;
 `;
 
 function Search({ isLoading, posts, query }) {
@@ -17,7 +23,7 @@ function Search({ isLoading, posts, query }) {
       <S.Main>
         {!isLoading && posts && (
           <>
-            <div>{`'${query}'에 대한 검색 결과 ${posts.length}개`}</div>
+            <S.Message>{`'${query}'에 대한 검색 결과 ${posts.length}개`}</S.Message>
             <PostBoxContainer posts={posts} />
           </>
         )}

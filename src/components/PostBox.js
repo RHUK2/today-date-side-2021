@@ -16,7 +16,7 @@ S.Post = styled.div`
   background-color: transparent;
   img {
     width: 100%;
-    height: 350px;
+    max-height: 300px;
     object-fit: cover;
     border-radius: 0.5rem;
   }
@@ -24,14 +24,14 @@ S.Post = styled.div`
 
 S.PostTitle = styled.h2`
   margin-top: 1rem;
-  font-size: 2.5rem;
+  font-size: 3rem;
 `;
 
 S.PostInfo = styled.div`
   display: flex;
   justify-content: space-between;
 
-  font-size: 1.7rem;
+  font-size: 2.5rem;
   margin-top: 0.5rem;
 `;
 
@@ -51,7 +51,7 @@ S.PaginateContainer = styled.div`
 `;
 
 S.NoDataContainer = styled.div`
-  height: 400px;
+  height: 500px;
   display: flex;
   justify-content: center;
   align-items: center;
