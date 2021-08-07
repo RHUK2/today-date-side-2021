@@ -17,6 +17,8 @@ const PORT = process.env.PORT || 4000;
 
 const app = express();
 
+// 😀
+app.use(express.static(path.join(__dirname, 'client/build')));
 // 서버와 api 통신 중 CORS 정책 허용하는 미들웨어
 app.use(
   cors({
@@ -55,6 +57,11 @@ passportConfig();
 app.use(morgan('dev'));
 
 app.use('/', apiRouter);
+
+// 😀
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+});
 
 app.listen(PORT, () => {
   console.log(`✅ Server: On | Port: ${PORT} `);
