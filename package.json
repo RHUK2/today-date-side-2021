@@ -20,6 +20,7 @@
     "passport-local": "^1.0.0"
   },
   "devDependencies": {
+    "@babel/cli": "^7.14.8",
     "@babel/core": "^7.14.6",
     "@babel/node": "^7.14.7",
     "@babel/preset-env": "^7.14.7",
@@ -28,7 +29,7 @@
   },
   "scripts": {
     "start": "node ./index.js",
-    "dev:server": "nodemon --exec babel-node ./index.js --watch server",
+    "dev:server": "nodemon --exec babel-node ./src/index.js --watch server",
     "dev:client": "cd client && npm start",
     "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\""
   },
