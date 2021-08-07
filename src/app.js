@@ -6,6 +6,7 @@ import session from 'express-session';
 import MongoStore from 'connect-mongo';
 import passport from 'passport';
 import morgan from 'morgan';
+import path from 'path';
 
 import passportConfig from './passport';
 import apiRouter from './routers/apiRouter';
