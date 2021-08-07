@@ -32,10 +32,8 @@
     "dev:server": "nodemon --exec babel-node ./src/index.js --watch server",
     "dev:client": "cd client && npm start",
     "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\"",
-    "build:server": "babel ./src --out-dir build",
-    "build:client": "cd ./client && npm run build",
-    "build": "npm run build:server && npm run build:client",
-    "prebuild": "rm -r -f build && cd client && rm -r -f build",
+    "build": "babel ./src --out-dir build",
+    "prebuild": "rm -r -f build",
     "heroku-postbuild": "npm run build && cd client && npm install"
   },
   "repository": {
