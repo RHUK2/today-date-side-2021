@@ -24,7 +24,9 @@ app.use(express.static(path.join(__dirname, '..', 'client/build')));
 // 서버와 api 통신 중 CORS 정책 허용하는 미들웨어
 app.use(
   cors({
-    origin: 'http://localhost:3000',
+    origin: process.env.PRODUCTION
+      ? 'https://today-date.herokuapp.com'
+      : 'http://localhost:3000',
     credentials: true,
   }),
 );
