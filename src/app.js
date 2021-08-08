@@ -14,12 +14,13 @@ import apiRouter from './routers/apiRouter';
 dotenv.config();
 
 // process.env.PORT는 다양한 실행 환경에서 사용할 포트 번호, 없으면 4000으로 설정
+// heroku 배포 시 환경 변수 설정 필요!!!!!!!!!!!!!!!!!!!!
 const PORT = process.env.PORT || 4000;
 
 const app = express();
 
 // 😀
-app.use(express.static(path.join(__dirname, 'client/build')));
+app.use(express.static(path.join(__dirname, '..', 'client/build')));
 // 서버와 api 통신 중 CORS 정책 허용하는 미들웨어
 app.use(
   cors({
@@ -63,7 +64,7 @@ app.use('/', apiRouter);
 
 // 😀
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+  res.sendFile(path.join(__dirname, '..', '/client/build', 'index.html'));
 });
 
 app.listen(PORT, () => {
