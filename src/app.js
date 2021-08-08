@@ -25,7 +25,7 @@ app.use(express.static(path.join(__dirname, '..', 'client/build')));
 app.use(
   cors({
     origin: process.env.PRODUCTION
-      ? 'https://today-date.herokuapp.com'
+      ? process.env.BASE_URL
       : 'http://localhost:3000',
     credentials: true,
   }),
