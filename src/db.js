@@ -6,7 +6,7 @@ dotenv.config();
 // 로컬 MongoDB or MongoAtlas로 연결을 열어주는 과정
 // .env 작성 시 세미콜론(;) 금지
 mongoose.connect(
-  process.env.PRODUCTION
+  process.env.NODE_ENV === 'production'
     ? process.env.MONGO_ACCESS_KEY_PRO
     : process.env.MONGO_ACCESS_KEY_DEV,
   {

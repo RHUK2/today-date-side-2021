@@ -24,9 +24,10 @@ app.use(express.static(path.join(__dirname, '..', 'client/build')));
 // 서버와 api 통신 중 CORS 정책 허용하는 미들웨어
 app.use(
   cors({
-    origin: process.env.PRODUCTION
-      ? process.env.BASE_URL
-      : 'http://localhost:3000',
+    origin:
+      process.env.NODE_ENV === 'production'
+        ? process.env.BASE_URL
+        : 'http://localhost:3000',
     credentials: true,
   }),
 );
@@ -44,9 +45,10 @@ app.use(
     resave: false, // false 권장
     saveUninitialized: false, // false 권장
     store: MongoStore.create({
-      mongoUrl: process.env.PRODUCTION
-        ? process.env.MONGO_ACCESS_KEY_PRO
-        : process.env.MONGO_ACCESS_KEY_DEV,
+      mongoUrl:
+        process.env.NODE_ENV === 'production'
+          ? process.env.MONGO_ACCESS_KEY_PRO
+          : process.env.MONGO_ACCESS_KEY_DEV,
     }), // 세션 저장소
     cookie: {
       maxAge: 1000 * 60 * 60 * 12,
