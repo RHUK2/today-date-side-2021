@@ -41,7 +41,9 @@ app.use(
     resave: false, // false 권장
     saveUninitialized: false, // false 권장
     store: MongoStore.create({
-      mongoUrl: process.env.MONGO_ACCESS_KEY,
+      mongoUrl: process.env.PRODUCTION
+        ? process.env.MONGO_ACCESS_KEY_PRO
+        : process.env.MONGO_ACCESS_KEY_DEV,
     }), // 세션 저장소
     cookie: {
       maxAge: 1000 * 60 * 60 * 12,
