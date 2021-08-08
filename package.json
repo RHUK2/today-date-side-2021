@@ -39,7 +39,7 @@
     "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\"",
     "build": "babel ./src --out-dir build",
     "prebuild": "rm -r -f build",
-    "heroku-postbuild": "npm run build && cd client && npm install"
+    "heroku-postbuild": "npm run build && cd client && npm install && npm run build"
   },
   "repository": {
     "type": "git",
