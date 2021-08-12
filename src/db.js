@@ -20,7 +20,9 @@ mongoose.connect(
 const db = mongoose.connection;
 
 // 그 인스턴스가 연결됐는지 안됐는지 확인
-db.on('error', () => console.error.bind(console, 'db connection error 🚫 '));
+db.on('error', () =>
+  console.error.bind(console, 'db connection error 🚫 '),
+);
 
 db.once('open', () => {
   console.log('✅ DB: On | MongoAtlas');

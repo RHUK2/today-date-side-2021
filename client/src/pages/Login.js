@@ -66,6 +66,7 @@ function Login({ onChange, onSubmitLogin }) {
             placeholder="이메일"
             type="email"
             onChange={onChange}
+            autoComplete="off"
             required
           />
           <S.Input

@@ -86,6 +86,7 @@ function Join({
             type="email"
             value={userInfo.email}
             onChange={onChange}
+            autoComplete="off"
             required
           />
           <S.Tag>별명 *</S.Tag>
@@ -98,6 +99,7 @@ function Join({
             onBlur={onHandleBlur}
             onFocus={onHandleFocus}
             minLength="2"
+            autoComplete="off"
             required
           />
           {isFocusNickname && existNickname && (

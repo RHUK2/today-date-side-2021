@@ -13,6 +13,7 @@ S.Main = styled.main`
 
 S.MainImgContainer = styled.div`
   position: relative;
+  min-height: 100vh;
 `;
 
 S.MainImg = styled.img`
