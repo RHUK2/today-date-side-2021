@@ -116,6 +116,7 @@ function PostUpload({ postInfo, onHandleChange, onHandleSubmit }) {
             onChange={onHandleChange}
             type="text"
             placeholder="제목"
+            autoComplete="off"
             required
           />
           <S.Select

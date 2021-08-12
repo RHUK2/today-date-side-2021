@@ -12,6 +12,7 @@ function PostUploadContainer({ history }) {
     fileImg: '',
     previewImg: '',
   });
+  const [isClicked, setIsClicked] = useState(false);
   const dispatch = useDispatch();
 
   const onHandleChange = (e) => {
@@ -21,7 +22,10 @@ function PostUploadContainer({ history }) {
         e.target.value = '';
         return;
       }
-      setPostInfo((prevState) => ({ ...prevState, fileImg: e.target.files }));
+      setPostInfo((prevState) => ({
+        ...prevState,
+        fileImg: e.target.files,
+      }));
       const previewImg = Array.from(e.target.files).map((file) =>
         URL.createObjectURL(file),
       );
@@ -35,6 +39,10 @@ function PostUploadContainer({ history }) {
   const onHandleSubmit = async (e) => {
     e.preventDefault();
 
+    if (isClicked) {
+      return;
+    }
+    setIsClicked(true);
     const formData = new FormData();
     formData.append('title', postInfo.title);
     formData.append('description', postInfo.description);
@@ -44,7 +52,9 @@ function PostUploadContainer({ history }) {
     }
 
     if (postInfo.previewImg) {
-      postInfo.previewImg.forEach((file) => URL.revokeObjectURL(file));
+      postInfo.previewImg.forEach((file) =>
+        URL.revokeObjectURL(file),
+      );
       setPostInfo((prevState) => ({ ...prevState, previewImg: '' }));
     }
 

@@ -20,7 +20,8 @@ S.Header = styled.header`
   justify-content: center;
 
   background-color: #fcf4a3;
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px,
+    rgba(0, 0, 0, 0.23) 0px 3px 6px;
 `;
 
 S.HeaderContainer = styled.div`
@@ -36,35 +37,11 @@ S.HeaderContainer = styled.div`
   gap: 2rem;
 `;
 
-S.SearchBox = styled.div`
-  width: 100%;
-  position: relative;
-  i {
-    position: absolute;
-    top: 1.3rem;
-    left: 1.2rem;
-    font-size: 1.6rem;
-    color: white;
-  }
-`;
-
-S.Input = styled.input`
-  padding: 1rem 4rem 0.8rem;
-  width: 100%;
-  font-size: 1.8rem;
-  color: white;
-  background-color: #222021;
-`;
-
 function Header() {
   return (
     <S.Header>
       <S.HeaderContainer>
         <Logo margin={'0.5rem 0 0 0'} />
-        {/* <S.SearchBox>
-          <i className="fas fa-search"></i>
-          <S.Input name="term" type="title" placeholder="장소 검색" />
-        </S.SearchBox> */}
         <SearchBarContainer />
         <NavContainer />
       </S.HeaderContainer>

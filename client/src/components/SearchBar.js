@@ -32,6 +32,7 @@ function SearchBar({ termInput, onChange, onSearch }) {
         type="title"
         placeholder="장소 검색"
         onChange={onChange}
+        autoComplete="off"
       />
     </S.SearchForm>
   );
