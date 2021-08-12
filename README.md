@@ -44,4 +44,39 @@
 
 ## 프로젝트 기능
 
+### 회원가입 / 로그인
+
+![오늘의데이트_로그인_회원가입](https://user-images.githubusercontent.com/75672249/129146366-8f84cefc-bb87-4ecd-ab51-3cefd1e8df76.gif)
+
+- passport.js를 이용한 쿠키/세션 로그인
+- 입력 정보를 받아 crypto를 이용해 비밀번호 암호화
+- 별명 존재 여부 및 비밀번호 일치 확인
+
+### 포스트 업로드 / 읽기
+
+![오늘의데이트_CR](https://user-images.githubusercontent.com/75672249/129146361-8196e146-fe4c-46ce-a631-5a6d43d7b779.gif)
+
+- 이미지 미리보기
+- react-slick을 이용한 이미지 슬라이드
+- multerS3 미들웨어를 이용하여 AWS S3에 파일 업로드
+- axios를 이용해 POST 통신을 통한 포스트 업로드
+- axios를 이용해 GET 통신을 통한 포스트 읽기
+
+### 포스트 수정 및 삭제
+
+![오늘의데이트_UD](https://user-images.githubusercontent.com/75672249/129146363-2f3ebf2b-9f8f-4077-9531-d11ca38dcdc1.gif)
+
+- axios를 이용해 PUT 통신을 통한 포스트 수정
+- axios를 이용해 DELETE 통신을 통한 포스트 삭제
+
+![오늘의데이트__페이징_정렬](https://user-images.githubusercontent.com/75672249/129146355-efbdb3df-fe23-4bef-84b1-c367c7fd58bf.gif)
+
+- react-paginate를 이용한 페이징
+- 위치 옵션에 따른 GET 통신으로 데이터 불러오기
+
+![오늘의데이트_마이페이지_검색](https://user-images.githubusercontent.com/75672249/129146367-11fc0d56-2527-435f-aca9-e5f40d415e65.gif)
+
+- 사용자가 작성한 글을 마이페이지에 표시
+- 사용자가 입력한 값을 쿼리 데이터로 넘겨받아 GET 통신으로 데이터 불러오기
+
 ***
