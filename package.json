@@ -34,7 +34,7 @@
   },
   "scripts": {
     "start": "node ./build/index.js",
-    "dev:server": "nodemon --exec babel-node ./src/index.js --watch server",
+    "dev:server": "nodemon --exec babel-node ./src/index.js --watch ./src",
     "dev:client": "cd client && npm start",
     "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\"",
     "build": "babel ./src --out-dir build",
